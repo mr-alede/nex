@@ -1,0 +1,16 @@
+@import 'src/styles/variables';
+:host {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+.spot-status--vacant {
+  color: $spotOccupancyStatusVacancy;
+}
+.spot-status--booked {
+  color: $spotOccupancyStatusBooked;
+}
+.spot-status--occupied {
+  color: $spotOccupancyStatusOccupied;
+}

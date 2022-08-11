@@ -1,0 +1,16 @@
+<mgl-geojson-source id="cameras-source" [data]="cameras" [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="cameras-layer" type="symbol" source="cameras-source" [layout]="(layouts$ | async)?.cameras"
+    [paint]="paints.cameras" (layerClick)="onCameraClick($event)" (layerMouseEnter)="layerMouseEnter()"
+    (layerMouseLeave)="layerMouseLeave()" [before]="'building-extrusion'">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!selectedCameraFeature" [feature]="selectedCameraFeature" [className]="'camera-popup'"
+    (close)="mapState.closePopup(); popupOpen = false" (open)="mapState.openPopup(); popupOpen = true"
+    [maxWidth]="'492px'">
+    <app-camera-popup [camera]="camera$ | async"></app-camera-popup>
+
+    <div class="dialog-background" *ngIf="busy">
+        <app-wait-indicator></app-wait-indicator>
+    </div>
+</mgl-popup>

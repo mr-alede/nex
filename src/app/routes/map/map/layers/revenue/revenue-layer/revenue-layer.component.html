@@ -1,0 +1,5 @@
+<mgl-geojson-source id="revenue-source" [data]="revenue" [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="revenue-layer" type="heatmap" source="revenue-source" [layout]="(layouts$ | async)?.revenue" [paint]="paints.revenue"
+    [before]="'building-extrusion'" (mouseEnter)="mouseEnter($event)" (mouseLeave)="mouseLeave($event)">
+</mgl-layer>

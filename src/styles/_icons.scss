@@ -1,0 +1,23 @@
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 3px;
+
+    &.logout {
+        left: 5px;
+        margin-right: 10px;
+        background-image: url(./icons/logout.svg);
+    }
+
+    &.settings {
+        background-image: url(./icons/settings.svg);
+    }
+
+    &.customization {
+        background-image: url(./icons/customization.svg);
+    }
+}

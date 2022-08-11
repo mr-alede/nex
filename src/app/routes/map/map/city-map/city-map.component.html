@@ -1,0 +1,141 @@
+<mgl-map [style]="style" [zoom]="zoom" [maxZoom]="18" [pitch]="pitch" [center]="center" (moveEnd)="onMoveEnd($event)"
+    (load)="onLoad($event)" [cursorStyle]="layersVisibility.cursorStyle" movingMethod="jumpTo"
+    [fitBoundsOptions]="{ duration: 0 }">
+
+    <app-mgl-control cssClass="map-sidebar-container">
+        <app-toggle-layers-sidebar></app-toggle-layers-sidebar>
+        <app-meter-sidebar></app-meter-sidebar>
+        <app-sign-sidebar></app-sign-sidebar>
+        <app-zone-sidebar></app-zone-sidebar>
+        <app-camera-sidebar></app-camera-sidebar>
+        <app-spot-sidebar></app-spot-sidebar>
+        <app-area-sidebar></app-area-sidebar>
+        <app-offstreet-zones-sidebar></app-offstreet-zones-sidebar>
+    </app-mgl-control>
+
+    <app-map-navigation-control cssClass="map-navigation">
+        <button class="mapboxgl-ctrl-home" (click)="home()">
+            <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Home"></span>
+        </button>
+        <button class="mapboxgl-ctrl-layers" (click)="toggleSidebar('layers')" title="Layers management">
+            <span class="mapboxgl-ctrl-icon" aria-hidden="true"></span>
+        </button>
+    </app-map-navigation-control>
+
+    <mgl-control position="bottom-left" *ngIf="initialized">
+        <div class="legend">
+            <div class="legend-group" *ngIf="isLayerVisible(layerName.Meters) && isMetersInfoPanelAvailable">
+                <div class="legend-group-header">Meters</div>
+                <div class="legend-item"><span class="item item-black"></span>motorcycle</div>
+                <div class="legend-item"><span class="item item-brown"></span>tour bus</div>
+                <div class="legend-item"><span class="item item-green"></span>short-term</div>
+                <div class="legend-item"><span class="item item-grey"></span>general metered</div>
+                <div class="legend-item"><span class="item item-purple"></span>boat trailer</div>
+                <div class="legend-item"><span class="item item-red"></span>6 wheeled commercial</div>
+                <div class="legend-item"><span class="item item-yellow"></span>commercial vehicle</div>
+            </div>
+            <div class="legend-group" *ngIf="isLayerVisible(layerName.Spots)">
+                <div class="legend-group-header">Curb Spaces</div>
+                <div class="legend-item"><span class="item item-grey spot-item"></span>not monitored</div>
+                <div class="legend-item"><span class="item item-green spot-item"></span>free</div>
+                <div class="legend-item"><span class="item item-yellow spot-item"></span>booked</div>
+                <div class="legend-item"><span class="item item-red spot-item"></span>busy</div>
+            </div>
+            <div class="legend-group" *ngIf="isLayerVisible(layerName.Traffic)">
+                <div class="legend-group-header">Traffic</div>
+                <div class="legend-item"><span class="traffic-item item-low"></span>low</div>
+                <div class="legend-item"><span class="traffic-item item-moderate"></span>moderate</div>
+                <div class="legend-item"><span class="traffic-item item-heavy"></span>heavy</div>
+                <div class="legend-item"><span class="traffic-item item-severe"></span>severe</div>
+            </div>
+            <div class="legend-group" *ngIf="isLayerVisible(layerName.Cameras)">
+                <div class="legend-group-header">Cameras</div>
+                <div class="legend-item legend-group-header"><img src="/assets/cameras/camera-active.svg"
+                        alt="Active">active</div>
+                <div class="legend-item legend-group-header"><img src="/assets/cameras/camera-inactive.svg"
+                        alt="Inactive">inactive</div>
+                <div class="legend-item legend-group-header"><img src="/assets/cameras/camera-offline.svg"
+                        alt="Offline">offline</div>
+            </div>
+            <div class="legend-group" *ngIf="isLayerVisible(layerName.Signs)">
+                <div class="legend-group-header">Signs</div>
+                <div class="legend-item legend-group-header"><img src="/assets/signs/sign-active.svg"
+                        alt="Active">active</div>
+                <div class="legend-item legend-group-header"><img src="/assets/signs/sign-inactive.svg"
+                        alt="Inactive">inactive</div>
+                <div class="legend-item legend-group-header"><img src="/assets/signs/sign-offline.svg"
+                        alt="Offline">offline</div>
+            </div>
+
+            <div class="legend-group legend-heatmap" *ngIf="isLayerVisible(layerName.Revenue)">
+                <div class="legend-group-header">Revenue Heatmap</div>
+                <div><img src="/assets/heatmap_scale.svg" alt="revenue"></div>
+                <div class="legend-heatmap-description">
+                    <div>Low</div>
+                    <div>High</div>
+                </div>
+            </div>
+
+        </div>
+    </mgl-control>
+
+    <mgl-image id="point-garage" url="/assets/garage.png"></mgl-image>
+    <mgl-image id="point-camera-active" url="/assets/cameras/camera-active.png"></mgl-image>
+    <mgl-image id="point-camera-inactive" url="/assets/cameras/camera-inactive.png"></mgl-image>
+    <mgl-image id="point-camera-offline" url="/assets/cameras/camera-offline.png"></mgl-image>
+    <mgl-image id="point-sign-active" url="/assets/signs/sign-active.png"></mgl-image>
+    <mgl-image id="point-sign-inactive" url="/assets/signs/sign-inactive.png"></mgl-image>
+    <mgl-image id="point-sign-offline" url="/assets/signs/sign-offline.png"></mgl-image>
+    <mgl-image id="point-blue" url="/assets/point-blue.png"></mgl-image>
+    <mgl-image id="point-black" url="/assets/point-black.png"></mgl-image>
+    <mgl-image id="point-green" url="/assets/point-green.png"></mgl-image>
+    <mgl-image id="point-violet" url="/assets/point-violet.png"></mgl-image>
+    <mgl-image id="point-red" url="/assets/point-red.png"></mgl-image>
+    <mgl-image id="point-yellow" url="/assets/point-yellow.png"></mgl-image>
+
+    <mgl-image id="fedex" url="/assets/fedex.png"></mgl-image>
+    <mgl-image id="ups" url="/assets/ups.png"></mgl-image>
+    <mgl-image id="ontrac" url="/assets/ontrac.png"></mgl-image>
+    <mgl-image id="aramac" url="/assets/aramac.png"></mgl-image>
+    <mgl-image id="amazon" url="/assets/amazon.png"></mgl-image>
+    <mgl-image id="usps" url="/assets/usps.png"></mgl-image>
+
+
+    <!-- Traffic -->
+    <app-traffic-layer></app-traffic-layer>
+
+    <!-- parking-areas -->
+    <app-areas-layer [map]="this"></app-areas-layer>
+
+    <!-- Zones -->
+    <app-zones-layer [zones]="zones$ | async" [map]="this"></app-zones-layer>
+
+    <!-- Offstreet Zones -->
+    <app-offstreet-zones-layer [zones]="offstreetZones$ | async" [map]="this" [mapboxMap]="map">
+    </app-offstreet-zones-layer>
+
+    <!-- Spots -->
+    <app-spots-layer [spots]="spots$ | async" [map]="this"></app-spots-layer>
+
+    <!-- Meters -->
+    <app-meters-layer [meters]="meters$ | async" [spots]="spots$ | async" [map]="this"></app-meters-layer>
+
+    <!-- Cameras -->
+    <app-cameras-layer [cameras]="cameras$ | async" [map]="this"></app-cameras-layer>
+
+    <!-- Signs -->
+    <app-signs-layer [signs]="signs$ | async" [map]="this"></app-signs-layer>
+
+    <!-- Revenue -->
+    <app-revenue-layer [revenue]="metersRevenue$ | async" [map]="this"></app-revenue-layer>
+
+    <mgl-control position="bottom-right">
+        <div class="interface-version">
+            <span class="interface-version-description">NexCity Beta Interface .7</span>
+        </div>
+    </mgl-control>
+</mgl-map>
+
+<div class="dialog-background" *ngIf="busy">
+    <app-wait-indicator></app-wait-indicator>
+</div>

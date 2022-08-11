@@ -1,0 +1,84 @@
+.mapboxgl-ctrl button:not(:disabled):hover {
+    background-color: transparent;
+}
+
+.mapboxgl-ctrl-bottom-right {
+    z-index: 1;
+}
+
+.mapboxgl-popup-content {
+    width: 210px;
+    position: relative;
+    font-family: var(--bs-font-sans-serif);
+
+    .col-form-label {
+        font-weight: bold;
+    }
+
+    h6 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .col-form-label-sm,
+    .form-control-sm {
+        line-height: 14px;
+        height: 14px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        min-height: 22px;
+        font-size: 13.2px;
+    }
+
+    .form-control-plaintext {
+        display: inline;
+        margin-left: 5px;
+    }
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #C2C2C2;
+}
+
+.dialog-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: rgba(151, 151, 151, 0.3);
+
+    &.background-transparent {
+        background-color: transparent;
+    }
+
+    app-wait-indicator {
+        position: absolute;
+        top: calc(50% - 65px);
+        left: calc(50% - 65px);
+    }
+}
+
+.wait-indicator-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: transparent;
+
+    app-wait-indicator {
+        position: absolute;
+        top: calc(50% - 65px);
+        left: calc(50% - 65px);
+    }
+}
+
+.mapboxgl-ctrl-logo {
+    position: relative;
+    left: 3px;
+}

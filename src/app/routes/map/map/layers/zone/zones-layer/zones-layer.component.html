@@ -1,0 +1,24 @@
+<mgl-geojson-source id="zones-source" [data]="zones" [generateId]="true">
+</mgl-geojson-source>
+
+<mgl-layer id="zones-layer-polygons" type="fill" source="zones-source" [layout]="(layouts$ | async)?.zones"
+  [paint]="paints.zonesPolygon" [filter]="['==', '$type', 'Polygon']" (layerClick)="onZoneClick($event)"
+  (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()">
+</mgl-layer>
+<mgl-layer id="zones-layer-lines" type="line" source="zones-source" [layout]="(layouts$ | async)?.zones"
+  [paint]="paints.zonesLine" [filter]="['==', '$type', 'LineString']" (layerClick)="onZoneClick($event)"
+  (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()">
+</mgl-layer>
+<mgl-layer id="zones-layer-points" type="circle" source="zones-source" [layout]="(layouts$ | async)?.zones"
+  [paint]="paints.zonesCircle" [filter]="['==', '$type', 'Point']" (layerClick)="onZoneClick($event)"
+  (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!selectedZonePoint" [feature]="selectedZonePoint" [className]="'zone-popup'" [maxWidth]="'434px'"
+  (close)="mapState.closePopup(); popupOpen = false" (open)="mapState.openPopup(); popupOpen = true">
+  <app-zone-popup [zone]="zone$ | async"></app-zone-popup>
+
+  <div class="dialog-background" *ngIf="busy">
+    <app-wait-indicator></app-wait-indicator>
+  </div>
+</mgl-popup>

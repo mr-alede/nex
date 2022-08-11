@@ -1,0 +1,16 @@
+<mgl-geojson-source id="offstreet-zones-source" [data]="zones" [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="offstreet-zones-layer" type="symbol" source="offstreet-zones-source"
+    [layout]="(layouts$ | async)?.offstreetZones" [paint]="paints.offstreetZones" (layerClick)="onZoneClick($event)"
+    (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!selectedZoneFeature" [feature]="selectedZoneFeature" [className]="'meter-popup'"
+    [maxWidth]="'281px'" (close)="mapState.closePopup(); popupOpen = false"
+    (open)="mapState.openPopup(); popupOpen = true">
+    <app-offstreet-zones-popup [offstreetZone]="offstreetZone$ | async"></app-offstreet-zones-popup>
+
+    <div class="dialog-background" *ngIf="busy">
+        <app-wait-indicator></app-wait-indicator>
+    </div>
+</mgl-popup>

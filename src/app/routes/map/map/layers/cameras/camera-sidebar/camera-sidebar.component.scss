@@ -1,0 +1,26 @@
+@import '../../../../../../../styles/variables';
+
+table {
+    width: 100%;
+
+    td,
+    th {
+        font-size: 12px;
+    }
+}
+
+tr.camera-event {
+    color: #039A36;
+
+    &.danger {
+        color: #D13438;
+    }
+}
+
+.settings {
+    .map-sidebar-row {
+        >label {
+            width: 55%;
+        }
+    }
+}

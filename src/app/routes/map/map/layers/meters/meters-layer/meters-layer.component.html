@@ -1,0 +1,34 @@
+<mgl-geojson-source id="meters-source" [data]="meters" [generateId]="true" #metersSource [data]="meters"
+    [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="meters-layer" type="circle" source="meters-source" [filter]="['!', ['has', 'point_count']]"
+    [layout]="(layouts$ | async)?.meters" [paint]="paints.meters" (layerClick)="onMeterClick($event)"
+    (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()" [before]="'building-extrusion'">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!clusterFeatures && clusterFeatures.length > 1" [lngLat]="clusterCenter" [className]="'meter-popup'"
+    [maxWidth]="'281px'">
+    <div class="map-popup-header">
+        <span class="meter-icon"></span>
+        <h4>Meters</h4>
+    </div>
+
+    <div class="map-popup-body">
+        <div *ngFor="let meter of clusterFeatures;" (click)="onClusterItemClick(meter)"
+            class="map-popup-row cluster-item">
+            <span class="cluster-item-icon" [class]="meter?.properties?.policy"></span>
+            <label>Policy: </label>
+            <span class="row-value">{{meter?.properties?.policy}} </span>
+        </div>
+    </div>
+</mgl-popup>
+
+<mgl-popup *ngIf="!!selectedMeterFeature" [feature]="selectedMeterFeature" [className]="'meter-popup'"
+    [maxWidth]="'281px'" (close)="mapState.closePopup(); popupOpen = false"
+    (open)="mapState.openPopup(); popupOpen = true">
+    <app-meter-popup [meter]="meter$ | async"></app-meter-popup>
+
+    <div class="dialog-background" *ngIf="busy">
+        <app-wait-indicator></app-wait-indicator>
+    </div>
+</mgl-popup>

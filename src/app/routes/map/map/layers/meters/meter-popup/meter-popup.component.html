@@ -1,0 +1,58 @@
+<div class="map-popup-header">
+    <span class="meter-icon"></span>
+    <h4>Meter: #{{meter?.Name ?? meter?.Id}}</h4>
+    <div class="meter-type">{{meter?.Type === meterType.SingleSpot && 'Single Curb Space'
+        || meter?.Type === meterType.MultiSpot && 'Multi Curb Space'
+        || meter?.Type === meterType.Unknown && 'Unknown'
+        || ' '}}</div>
+</div>
+
+<div class="map-popup-body">
+    <button style="display:none;"></button>
+
+    <div class="map-popup-row" *ngIf="!!meter?.Address">
+        <label>Address:</label>
+        <div class="row-value">{{meter?.Address}}</div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="!!meter?.zone">
+        <label>Zone:</label>
+        <div class="row-value">
+            <button ngxFluentDesignLinkButton class="meter-button" (click)="openZone()">
+                {{meter?.zone?.Name}}
+            </button>
+        </div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="meter?.SpotIds">
+        <label>{{meter?.Type === meterType.MultiSpot ? 'Curb Spaces:' : 'Curb Space:'}}</label>
+        <div class="row-value">
+            <app-spots [spots]="meter?.SpotIds"></app-spots>
+        </div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="!!meter?.Vendor">
+        <label>Vendor:</label>
+        <div class="row-value">{{meter?.Vendor}}</div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="!!meter?.Model">
+        <label>Model:</label>
+        <div class="row-value">{{meter?.Model}}</div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="!!meter?.HoursOfOperation">
+        <label>Operation hours:</label>
+        <div class="row-value">{{meter?.HoursOfOperation}}</div>
+    </div>
+
+    <div class="map-popup-row" *ngIf="!!meter?.MaxTime">
+        <label>Maximum time:</label>
+        <div class="row-value">{{meter?.MaxTime}}</div>
+    </div>
+
+    <div class="map-popup-row more-info">
+        <button ngxFluentDesignLinkButton (click)="moreInfo()"
+            [disabled]="(mapState.sidebarVisible$ | async) === 'meter'"> More info </button>
+    </div>
+</div>

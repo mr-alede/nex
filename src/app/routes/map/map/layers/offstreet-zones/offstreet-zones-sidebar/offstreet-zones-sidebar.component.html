@@ -1,0 +1,64 @@
+<app-sidebar-animation-container type="offstreet-zone">
+  <div class="map-sidebar map-sidebar-info">
+    <div class="map-sidebar-header">
+      <h3>{{offstreetZone?.Name}}</h3>
+      <button class="btn-close" (click)="close()">
+      </button>
+    </div>
+
+    <div class="map-sidebar-body">
+      <div>
+        <app-panel-collapse header="General info" [expanded]="true">
+          <div class="map-sidebar-row">
+            <label>Address</label>
+            <div>{{offstreetZone?.Address}}</div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>District:</label>
+            <div>
+              <button ngxFluentDesignLinkButton (click)="areaClick(offstreetZone?.area)">
+                {{offstreetZone?.area?.Name}}
+              </button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Vendor:</label>
+            <div>
+              {{offstreetZone?.Vendor}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row" *ngIf="(offstreetZone?.SpotsCount ?? 0) > 0">
+            <label>Spaces count:</label>
+            <div>
+              {{offstreetZone?.SpotsCount}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Geo:</label>
+            <div>
+              <app-geo-coordinates [coordinates]="offstreetZone?.Position"></app-geo-coordinates>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row more-info">
+            <button ngxFluentDesignLinkButton class="more-info-button"
+              [disabled]="(mapStateService.popupVisible$ | async)" (click)="mapView()"> Map View </button>
+          </div>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="offstreetZone?.revenue" header="Revenue" [expanded]="false">
+          <app-revenue-table [revenue]="offstreetZone?.revenue"></app-revenue-table>
+
+          <div class="map-sidebar-row more-info">
+            <app-revenue-more-info [garageId]="offstreetZone?.LocationId"></app-revenue-more-info>
+          </div>
+        </app-panel-collapse>
+
+      </div>
+    </div>
+  </div>
+</app-sidebar-animation-container>

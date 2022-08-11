@@ -1,0 +1,19 @@
+:host {
+    display: block;
+}
+
+.basic-container {
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+}
+
+img {
+    max-width: 100%;
+    position: absolute;
+    top: 28%;
+    left: 28%;
+    height: auto;
+    width: 54px;
+    // clip-path: circle(45% at 50% 49%);
+}

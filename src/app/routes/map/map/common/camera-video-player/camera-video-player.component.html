@@ -1,0 +1,14 @@
+<img *ngIf="actualUrl && actualUrl === videoUrl"
+     [src]="actualUrl" class="img-fluid" onerror="this.src='/assets/placeholder-image.jpg'" />
+
+<img *ngIf="actualUrl && actualUrl === pictureUrl"
+     [src]="actualUrl | appAddAuthToken | async" class="img-fluid" onerror="this.src='/assets/placeholder-image-transparent.png'" />
+
+<div class="command-panel">
+  <div class="main-commands">
+    <img [src]="videoState === 'pause' ? '/assets/camera-video-player/Play-1.svg' : '/assets/camera-video-player/Pause-1.svg'" alt="play" (click)="togglePlay()">
+  </div>
+  <div class="expand-command" (click)="expandModal()">
+    <img src="/assets/camera-video-player/expand.svg" alt="expand">
+  </div>
+</div>

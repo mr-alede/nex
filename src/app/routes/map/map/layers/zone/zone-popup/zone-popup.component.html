@@ -1,0 +1,101 @@
+<div class="map-popup-header">
+  <span class="zone-icon"></span>
+  <h4>Zone: {{zone?.Name}}</h4>
+  <div class="zone-spots-status">
+    <span class="zone-spots-status--vacant">{{'Vacant: ' + spotsCountsByState?.vacant}} </span>
+    <span class="zone-spots-status--booked">{{' Booked: ' + spotsCountsByState?.booked}} </span>
+    <span class="zone-spots-status--occupied">{{' Occupied: ' + spotsCountsByState?.occupied}}</span>
+  </div>
+</div>
+
+<div class="map-popup-body">
+
+  <div class="map-popup-row" *ngIf="!!zone?.area">
+    <div class="column-label">
+      <label>{{zone?.area | areaTypeName | async}}:</label>
+    </div>
+
+    <div class="row-value row-zone-button">
+      <button ngxFluentDesignLinkButton (click)="openArea()">
+        {{zone?.area?.Name}}
+      </button>
+    </div>
+  </div>
+
+  <!-- START SPOT WITH CAMERAS BLOCK -->
+
+  <div class="map-popup-row" *ngIf="!!(cameraStatesWithPictureUrl$ | async)">
+    <div class="column-label">
+
+      <label>Cameras:</label>
+      <div class="label-description">{{(cameraStatesWithPictureUrl$ | async)?.length}} items</div>
+
+    </div>
+
+    <div class="map-popup-row row-value-wrap">
+      <div class="row-value" *ngFor="let camera of cameraStatesWithPictureUrl$ | async">
+        <app-picture (click)="openCamera(camera.CameraId)" class="camera-picture"
+          [url]="camera.PictureUrl | appAddAuthToken | async"></app-picture>
+        <div class="pic-info"><span
+            [style.color]="camera?.Status === cameraStstus.Active ? 'green' : 'grey'">{{camera?.Status ===
+            cameraStstus.Active ? 'Active' :
+            'Not Active'}}</span>
+        </div>
+        <div class="pic-info"><span>{{camera.LastUpdated | amDateFormat:'hh:mm a'}}</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- END SPOT WITH CAMERAS BLOCK -->
+
+  <div class="map-popup-row" *ngIf="zone?.spotsStates">
+    <div class="column-label">
+      <label>Curb Spaces:</label>
+      <div class="label-description">{{zone?.spotsStates?.length}} items</div>
+    </div>
+
+    <div class="map-popup-row row-value-wrap">
+      <app-spots style="margin-bottom: 10px" *ngFor="let state of zone?.spotsStates" [spots]="[state.SpotId]">
+      </app-spots>
+    </div>
+
+  </div>
+
+  <div class="map-popup-row" *ngIf="!!(signsWithPictureUrl$ | async)">
+    <div class="column-label">
+      <label>Signs:</label>
+      <div class="label-description">{{(signsWithPictureUrl$ | async)?.length}} items</div>
+    </div>
+    <div class="map-popup-row row-value-wrap">
+      <div class="row-value" *ngFor="let sign of signsWithPictureUrl$ | async">
+        <app-picture class="sign-picture" *ngIf="sign?.PictureUrl" [url]="sign.PictureUrl | appAddAuthToken | async">
+        </app-picture>
+        <div class="pic-info"><span [style.color]="sign?.Status === signStatus.Active ? 'green' : 'grey'">{{sign?.Status
+            === signStatus.Active ? 'Active'
+            : 'Not Active'}}</span>
+        </div>
+        <div class="pic-info"><span>{{sign?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-popup-row">
+    <div class="column-label">
+      <label>Meters:</label>
+      <div class="label-description">{{zone?.metersNames?.length}} items</div>
+    </div>
+    <div class="row-value" style="width: 100%">
+      <button class="meter-button" (click)="openMeter(meter.Id)" ngxFluentDesignLinkButton
+        *ngFor="let meter of zone?.metersNames; let isLast=last">
+        {{meter.Name}}
+      </button>
+    </div>
+  </div>
+
+  <div class="map-popup-row more-info">
+    <button ngxFluentDesignLinkButton (click)="moreInfo()"
+      [disabled]="(mapState.sidebarVisible$ | async) === 'zone'">More info
+    </button>
+  </div>
+</div>

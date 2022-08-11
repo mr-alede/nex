@@ -1,0 +1,79 @@
+@import '../../../styles/variables';
+
+:host {
+    display: block;
+    width: 206px;
+    padding-top: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-link {
+    color: $textColor;
+    display: block;
+    padding: 7px 10px;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+    &:hover,
+    &.active {
+        background-color: #F8F8F8;
+    }
+}
+
+ul>li {
+    a {
+        padding-left: 30px;
+    }
+
+    >ul>li {
+        >a {
+            padding-left: 40px;
+        }
+
+        >ul>li {
+            >a {
+                padding-left: 60px;
+            }
+        }
+    }
+}
+
+.nav-section {
+    position: relative;
+
+    >i.bi.bi-chevron-up {
+        position: absolute;
+        left: 8px;
+    }
+
+    +ul {
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    &.active {
+        background-color: initial;
+
+        >i.bi.bi-chevron-up {
+            &::before {
+                transform: rotate(-180deg);
+            }
+        }
+
+        +ul {
+            height: auto;
+        }
+    }
+}
+
+ul>li>ul>li {
+    .nav-section {
+        >i.bi.bi-chevron-up {
+            left: 16px;
+        }
+    }
+}

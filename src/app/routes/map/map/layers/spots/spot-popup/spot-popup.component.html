@@ -1,0 +1,76 @@
+<div class="map-popup-header">
+  <app-spot-icon [policyType]="spot?.regulation?.Policy"></app-spot-icon>
+  <h4>Curb Space: #{{spot?.Name}}</h4>
+  <span class="spot-description">{{policyTypeNameAndColor?.name}}</span>
+  <span *ngIf="policyTypeNameAndColor?.name">{{' | '}}</span>
+  <app-spots-states [spotsStates]="spot?.spotsStates"></app-spots-states>
+</div>
+
+<div class="map-popup-body">
+
+  <div class="map-popup-row">
+    <div class="row-value" *ngIf="!!spot?.camera">
+      <label class="row-title">Camera</label>
+      <app-picture (click)="openCamera()" class="camera-picture" [url]="spotPictureUrl | appAddAuthToken | async">
+      </app-picture>
+      <div class="pic-info">
+        <app-camera-status [status]="spot?.cameraState?.Status"></app-camera-status>
+        <div>Last update: {{spot?.cameraState?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</div>
+      </div>
+    </div>
+    <div class="row-value" *ngIf="!!spot?.signState">
+      <label class="row-title">Sign</label>
+      <app-picture class="sign-picture" [url]="signPictureUrl | appAddAuthToken | async"></app-picture>
+      <div class="pic-info"><span
+          [style.color]="spot?.signState?.Status === signStatus.Active ? 'green' : 'grey'">{{spot?.signState?.Status ===
+          signStatus.Active ? 'Active' :
+          'Not Active'}}</span>
+      </div>
+      <div class="pic-info" *ngIf="spot?.signState?.LastUpdated"><span>Last update: {{spot?.signState?.LastUpdated |
+          amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+    </div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="spot?.camera">
+    <label>Address:</label>
+    <div class="row-value">{{spot?.camera?.Address}}</div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="spot?.area">
+    <label>District:</label>
+    <div class="row-value">
+      <button class="spot-button" ngxFluentDesignLinkButton (click)="openArea()">
+        {{spot?.area?.Name}}
+      </button>
+    </div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="spot?.zone">
+    <label>Zone:</label>
+    <div class="row-value">
+      <button class="spot-button" ngxFluentDesignLinkButton (click)="openZone()">
+        {{spot?.zone?.Name}}
+      </button>
+    </div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="spot?.metersNames">
+    <label>Meters:</label>
+    <div class="row-value">
+      <button class="meter-button" (click)="openMeter(meter.Id)" ngxFluentDesignLinkButton
+        *ngFor="let meter of spot?.metersNames">
+        {{meter.Name}}
+      </button>
+    </div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="spot?.spotsStates?.length && spot!.spotsStates[0].CompanyName">
+    <label>Carrier:</label>
+    <div class="row-value">{{spot!.spotsStates[0].CompanyName}}</div>
+  </div>
+
+  <div class="map-popup-row more-info">
+    <button ngxFluentDesignLinkButton (click)="moreInfo()"
+      [disabled]="(mapState.sidebarVisible$ | async) === 'spot'">More info</button>
+  </div>
+</div>

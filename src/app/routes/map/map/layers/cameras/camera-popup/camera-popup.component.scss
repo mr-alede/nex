@@ -1,0 +1,58 @@
+@import '../../../../../../../styles/variables';
+
+app-camera-video-player {
+    width: 400px;
+    height: 280px;
+    margin-bottom: 5px;
+    min-height: 148px;
+}
+
+.camera-rows {
+    display: flex;
+    flex-direction: row;
+}
+
+.right-column {
+    margin-left: 15px;
+    flex-grow: 1;
+}
+
+.map-popup-header {
+    h4,
+    app-camera-status {
+        margin-left: 40px;
+    }
+}
+
+.pic-info {
+    font-size: 12px;
+}
+
+.map-popup-row {
+    >label {
+        width: 36%;
+    }
+
+    .row-value {
+        width: 64%;
+        font-size: 12px;
+    }
+}
+
+.spot-status {
+    display: block;
+    width: 25px;
+    height: 15px;
+    position: relative;
+    top: 6px;
+    float: left;
+    margin-right: 5px;
+}
+
+.spots-number {
+    font-size: 10px;
+    font-style: italic;
+    line-height: 10px;
+    color: #A4A6AA;
+    position: absolute;
+}

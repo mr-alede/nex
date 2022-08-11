@@ -1,0 +1,53 @@
+.spot-status {
+  display: block;
+  width: 25px;
+  height: 15px;
+  position: relative;
+  top: 6px;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+table {
+  td, th {
+    padding: 5px;
+  }
+
+  th, td:first-child {
+    font-weight: 700;
+  }
+}
+
+.map-sidebar-row-value-wrap {
+  width: 100%;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+.row-value {
+  width: 7em;
+  margin-bottom: 10px;
+
+  .sign-picture {
+    width: 75px;
+  }
+
+  .camera-picture {
+    width: 65px;
+    height: 40px;
+  }
+}
+
+.no-data {
+    font-style: italic;
+    font-size: 12px;
+    color: #a19f9d;
+}
+
+.zone-button {
+  text-align: start;
+}

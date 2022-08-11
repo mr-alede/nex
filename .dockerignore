@@ -1,0 +1,12 @@
+node_modules
+.git
+.gitignore
+.editconfig
+Dockerfile
+docker-compose.yml
+.idea
+.vs
+.vscode
+dist
+.env
+entrypoint.sh

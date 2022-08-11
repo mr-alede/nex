@@ -1,0 +1,8 @@
+<div class="home-container" *ngIf="!isAuthenticated">
+  <div class="home-logo">
+    <img src="assets/logo-welcome-page.png" alt="UMOJO">
+  </div>
+  <div class="home-login">
+    <button (click)="login()">Login</button>
+  </div>
+</div>

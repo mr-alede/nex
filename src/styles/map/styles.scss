@@ -1,0 +1,23 @@
+@import './map';
+@import './map-sidebar';
+@import './map-popup';
+@import './map-navigation';
+
+.map-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+
+    width: 31px;
+    height: 31px;
+}
+
+.btn-close {
+    transform: scale(0.7);
+
+    &:focus {
+        box-shadow: none;
+    }
+}

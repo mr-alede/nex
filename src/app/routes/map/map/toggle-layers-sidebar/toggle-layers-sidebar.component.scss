@@ -1,0 +1,33 @@
+@import 'src/styles/variables';
+
+.revenue-period-row {
+    display: flex;
+    justify-content: space-between;
+
+    >label {
+        margin-left: 10px;
+    }
+
+    >ng-select {
+        min-width: 160px;
+    }
+}
+
+.area-types-row {
+    display: flex;
+    justify-content: space-between;
+
+    >ng-select {
+        min-width: 220px;
+    }
+
+    >label {
+        padding-top: 5px;
+        color: $textColor;
+    }
+}
+
+.map-sidebar-area-types-row-border {
+    margin: 0px 0px 20px 0px;
+    border-bottom: 1px solid #EFEDEC;
+}

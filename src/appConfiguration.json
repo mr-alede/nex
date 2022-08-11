@@ -1,0 +1,14 @@
+{
+    "api_url": "https://nexcityapi.umojodev.com",
+    "frontent_api_url": "https://nexcityfeapi.umojodev.com",
+    "map": {
+        "lng": -122.40815609804761,
+        "lat": 37.78884904587787,
+        "style": "mapbox://styles/mr-alede/ckvs2mv2g0nfb16qug5k9lege",
+        "mapbox_api_token": "pk.eyJ1IjoibXItYWxlZGUiLCJhIjoiY2t2czIxcXVlMmg3djJxa2wyOXpwMTI5bSJ9.mr77q7sKRRUR3ccqD91RTQ"
+    },
+    "auth": {
+        "aadClientId": "cedf3346-8919-4f2d-b91c-9d238b7c4cc2",
+        "aadAuthority": "https://login.microsoftonline.com/2b42b343-b349-421e-83fc-7f12b246bdbb"
+    }
+}

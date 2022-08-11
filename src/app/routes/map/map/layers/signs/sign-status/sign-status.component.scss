@@ -1,0 +1,15 @@
+.sign-status {
+    min-height: 20px;
+
+    &.active {
+        color: #107C10;
+    }
+
+    &.inactive {
+        color: red;
+    }
+}
+
+:host {
+    display: block;
+}

@@ -1,0 +1,67 @@
+<nav class="navbar bg-dark navbar-dark navbar-expand-sm">
+    <div class="navbar-container">
+        <a class="logo-navbar" href="#">
+            <img src="/assets/logo-navbar-vector.svg" alt="Umojo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngIf="!!userProfile && !!city">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/map">Map</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="!!userProfile && !!city">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/reports">Reports</a>
+                </li>
+                <!-- <li class="nav-item" routerLinkActive="active" *ngIf="!!userProfile && !!city">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/forecasting">Forecasting</a>
+                </li> -->
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" style="margin: 4px 10px 0 0;" *ngIf="!!userProfile">
+                    <ng-select class="ng-select-sm" [items]="cities" bindLabel="Name" [ngModel]="city"
+                        (change)="onCitySelected($event)" [searchable]="false" [clearable]="false"
+                        [readonly]="cities.length < 2">
+                    </ng-select>
+                </li>
+                <!-- <li class="nav-item" *ngIf="!!userProfile">
+                    <div class="nav-icon nav-icon--pointer">
+                        <img src="/assets/filters.png" alt="filters">
+                    </div>
+                </li> -->
+                <li class="nav-item" *ngIf="!userProfile">
+                    <a class="nav-link" href="#" (click)="login($event)">Log in</a>
+                </li>
+                <li class="nav-item dropdown ml-auto" *ngIf="!!userProfile" dropdown
+                    (onShown)="userDropDownExpand = true" (onHidden)="userDropDownExpand = false">
+                    <a class="nav-link dropdown-toggle" href="#" dropdownToggle [class.open]="userDropDownExpand"
+                        (click)="userDropdown($event)">
+                        {{userProfile.name}}
+                    </a>
+                    <ul class="dropdown-menu" *dropdownMenu>
+                        <li class="menu-item">
+                            <a class="dropdown-item" href="#" (click)="settings($event)">
+                                <span class="menu-icon settings"></span>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="dropdown-item" href="#" (click)="customization($event)">
+                                <span class="menu-icon customization"></span>Customization
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="dropdown-item" href="#" (click)="logout($event)">
+                                <span class="menu-icon logout"></span>Log out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

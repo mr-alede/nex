@@ -1,0 +1,183 @@
+<app-sidebar-animation-container type="spot">
+  <div class="map-sidebar map-sidebar-info">
+    <div class="map-sidebar-header">
+      <h3>Curb Space: #{{spot?.Name ?? spot?.Id}}</h3>
+
+      <button class="btn-close" (click)="close()">
+      </button>
+    </div>
+
+    <div class="map-sidebar-body">
+      <div>
+        <app-panel-collapse header="General Info" [expanded]="true">
+
+          <div class="map-sidebar-row" *ngIf="spot?.spotsStates?.length">
+            <label>Status:</label>
+            <div>
+              <app-spots-states [spotsStates]="spot?.spotsStates"></app-spots-states>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row" *ngIf="spot?.area">
+            <label>District:</label>
+            <div>
+              <button class="spot-button" ngxFluentDesignLinkButton (click)="openArea()">
+                {{spot?.area?.Name}}
+              </button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Zone:</label>
+            <div>
+              <button class="spot-button" ngxFluentDesignLinkButton (click)="openZone()">
+                {{spot?.zone?.Name}}
+              </button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Meters:</label>
+            <div>
+              <button class="meter-button" (click)="openMeter(meter.Id)" ngxFluentDesignLinkButton *ngFor="let meter of spot?.metersNames">
+                {{meter.Name}}
+              </button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row" *ngIf="spot?.spotsStates?.length && spot!.spotsStates[0].CompanyName">
+            <label>Carrier:</label>
+            <div>{{spot!.spotsStates[0].CompanyName}}</div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Geo:</label>
+            <div class="right-column">
+              <div>
+                {{geoPositions[0]}},
+              </div>
+              <div>
+                {{geoPositions[1]}}
+              </div>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row more-info">
+            <button ngxFluentDesignLinkButton class="more-info-button" [disabled]="(mapState.popupVisible$ | async)"
+                    (click)="mapView()"> Map View
+            </button>
+          </div>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="spot?.regulation" header="Regulations" [expanded]="false">
+          <div class="map-sidebar-row" *ngIf="spot?.PolicyType !== spotPolicyType.Unknown">
+            <label>Policy:</label>
+            <div>
+              <button class="policy-label"
+                      [ngClass]="{'policy-label--black': policyTypeNameAndColor?.color === 'Yellow'}"
+                      [ngStyle]="{ 'background-color': policyTypeNameAndColor?.color }">{{policyTypeNameAndColor?.name}}</button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Rates schedule:</label>
+          </div>
+
+          <div class="schedule" *ngFor="let schedule of uniqRegulations; let shIndex = index">
+            <div class="map-sidebar-row" *ngFor="let item of schedule">
+
+              <div class="left-column">
+                <div>{{weekDaysSchedule.getAmericanHour((item.FromTime))}}
+                  {{' - '}}
+                  {{weekDaysSchedule.getAmericanHour(item.ToTime)}}
+                </div>
+                <div>{{sumDays(shIndex, item.Time)}}</div>
+              </div>
+
+              <div class="right-column">
+                <ng-container *ngFor="let rate of item?.Rates">
+                  <div class="schedule-rate" *ngIf="rate?.Rate && rate?.Rate !== 0; else withOutRate">{{rate.Rate + '$/h '}}
+                    <span class="regulation-alt">
+                    {{weekDaysSchedule.diffHourDescription(rate?.FromTime, rate?.ToTime)}}
+                    </span>
+                  </div>
+                  <ng-template #withOutRate>
+                    <div
+                      class="right-column" [ngClass]="{'right-column--padding': !item?.TimeLimitMinutes}">{{spotTypesCalculator.getScheduleTypeName(item.ScheduleType)}}</div>
+                  </ng-template>
+                </ng-container>
+                <div class="regulation-alt"
+                     *ngIf="item?.TimeLimitMinutes">{{item?.TimeLimitMinutes + ' minutes parking limit'}}</div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </app-panel-collapse>
+
+
+        <app-panel-collapse *ngIf="!!spot?.camera" header="Camera" (expandedChange)="eventsExpanded($event)"
+                            [expanded]="eventsPanelExpanded">
+          <div class="spiner-container">
+            <div class="map-sidebar-row">
+              <div class="left-column">
+                <app-picture (click)="openCamera()" class="camera-picture" [url]="cameraPictureUrl | appAddAuthToken | async"></app-picture>
+                <div class="pic-info"><span
+                  [style.color]="cameraPictureUrl ? 'green' : 'grey'">{{cameraPictureUrl ?
+                  'Active' : 'Not Active'}}</span>
+                </div>
+                <div class="pic-info"><span>Last update: {{spot?.camera?.UpdatedAt |
+                  amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+              </div>
+              <div class="right-column">
+                <div class="map-sidebar-row">
+                  <label>Time In:</label>
+                  <div>{{event?.Start | amDateFormat:'hh:mm a'}}</div>
+                </div>
+                <div class="map-sidebar-row">
+                  <label>Time Out:</label>
+                  <div>{{event?.End | amDateFormat:'hh:mm a'}}</div>
+                </div>
+                <div class="map-sidebar-row">
+                  <label>Duration:</label>
+                  <div>{{event?.Start! | appDiffMinutes: event?.End!}}</div>
+                </div>
+                <div class="map-sidebar-row">
+                  <label>Type:</label>
+                  <div>{{event?.VehicleType}}</div>
+                </div>
+                <div class="map-sidebar-row">
+                  <label>Event:</label>
+                  <div>{{event?.EventType}}</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="map-sidebar-row more-info">
+              <button ngxFluentDesignLinkButton class="more-info-button" disabled (click)="moreInfoCamera()"> More Info</button>
+            </div>
+            <div class="wait-indicator-container" *ngIf="busy">
+              <app-wait-indicator></app-wait-indicator>
+            </div>
+          </div>
+        </app-panel-collapse>
+
+        <app-panel-collapse header="Sign" *ngIf="!!spot?.signState" [expanded]="false">
+          <app-picture class="sign-picture" [url]="signPictureUrl | appAddAuthToken | async"></app-picture>
+          <div class="pic-info"><span
+            [style.color]="spot?.signState?.Status === signStatus.Active ? 'green' : 'grey'">{{spot?.signState?.Status === signStatus.Active ?
+            'Active' : 'Not Active'}}</span>
+          </div>
+          <div class="pic-info">
+            <span *ngIf="spot?.signState?.LastUpdated">Last update: {{spot?.signState?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+          <div class="map-sidebar-row more-info">
+            <button ngxFluentDesignLinkButton class="more-info-button" disabled (click)="moreInfoSign()">More Info</button>
+          </div>
+        </app-panel-collapse>
+      </div>
+    </div>
+  </div>
+
+</app-sidebar-animation-container>

@@ -1,0 +1,257 @@
+.mapboxgl-popup {
+    .mapboxgl-popup-content {
+        padding: 0;
+    }
+
+    .mapboxgl-popup-close-button {
+        color: transparent;
+        background: transparent url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>") center/1em auto no-repeat;
+        box-sizing: content-box;
+        width: 1em;
+        height: 1em;
+        padding: 0.25em 0.25em;
+        transform: scale(0.9);
+
+        top: 10px;
+        right: 10px;
+        opacity: 0.5;
+
+        &:hover {
+            text-decoration: none;
+            opacity: 0.75;
+        }
+    }
+
+    .map-popup-header {
+        padding: 12px 10px 8px 14px;
+        position: relative;
+        min-height: 63px;
+
+        background: $headerbackground;
+        border-bottom: $headerBorder;
+        color: $textColorLight;
+
+        * {
+            color: $textColorLight;
+        }
+
+        h6,
+        h5,
+        h4,
+        h3,
+        h2,
+        h1 {
+            margin-bottom: 0;
+        }
+
+        h4 {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 600;
+        }
+
+        .camera-icon,
+        .sign-icon,
+        .meter-icon,
+        .spot-icon,
+        .offstreet-zone-icon,
+        .zone-icon,
+        .area-icon {
+            position: absolute;
+            width: 36px;
+            height: 40px;
+            top: 10px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .header-description {
+            color: $textColorLight;
+            font-size: 12px;
+        }
+    }
+
+    .map-popup-body {
+        padding: 14px 18px 20px;
+        color: $textColorLight;
+    }
+
+    .pic-info {
+        font-size: 10px;
+        color: $textColorLight;
+        line-height: 12px;
+
+        .state-updated {
+            color: $textColor;
+        }
+    }
+
+    app-picture {
+        margin-bottom: 5px;
+    }
+}
+
+.camera-popup {
+    .mapboxgl-popup-content {
+        width: 692px;
+    }
+
+    .camera-stream {
+        width: 100%;
+        height: auto;
+        min-height: 480px;
+        background: url(/assets/placeholder-image.jpg) no-repeat scroll 0 0;
+        background-size: contain;
+    }
+}
+
+.meter-popup {
+    .mapboxgl-popup-content {
+        width: 281px;
+    }
+}
+
+.sign-popup {
+    .mapboxgl-popup-content {
+        width: 395px;
+    }
+}
+
+.spot-popup {
+    .mapboxgl-popup-content {
+        width: 280px;
+    }
+}
+
+.zone-popup {
+    .mapboxgl-popup-content {
+        width: 484px;
+    }
+}
+
+.area-popup {
+    .mapboxgl-popup-content {
+        width: 496px;
+    }
+
+    app-panel-collapse {
+        padding: 0 0 0 20px;
+        border-bottom: none;
+
+        h4 {
+            font-size: 14px;
+            color: #605E5C;
+        }
+    }
+}
+
+.revenue-tooltip {
+    .mapboxgl-popup-content {
+        max-width: 120px;
+    }
+}
+
+.meter-icon {
+    background-image: url(../icons/meter.svg);
+}
+
+.sign-icon {
+    &.offline {
+        background-image: url(../../assets/signs/sign-offline.svg);
+    }
+
+    &.inactive {
+        background-image: url(../../assets/signs/sign-inactive.svg);
+    }
+
+    &.active {
+        background-image: url(../../assets/signs/sign-active.svg);
+    }
+}
+
+.camera-icon {
+    &.offline {
+        background-image: url(../../assets/cameras/camera-offline.svg);
+    }
+
+    &.inactive {
+        background-image: url(../../assets/cameras/camera-inactive.svg);
+    }
+
+    &.active {
+        background-image: url(../../assets/cameras/camera-active.svg);
+    }
+}
+
+.area-icon {
+    background-image: url(../icons/area.svg);
+}
+
+.offstreet-zone-icon {
+    background-image: url(../icons/offstreet-zone.svg);
+}
+
+.zone-icon {
+    background-image: url(../icons/zone.svg);
+}
+
+.map-popup-row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+    >label {
+        width: 50%;
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 400;
+        color: $textColorLight;
+    }
+
+    .row-value {
+        width: 50%;
+        font-size: 14px;
+        line-height: 22px;
+        color: $textColor;
+    }
+
+    &.more-info {
+        justify-content: right;
+        margin-bottom: 0;
+        margin-top: 12px;
+    }
+}
+
+.no-content {
+    line-height: 22px;
+    font-style: italic;
+    font-size: 12px;
+    color: #a19f9d
+}
+
+
+.cluster-item {
+    align-items: center;
+    padding: 1px;
+
+    &:hover {
+        background-color: #f5faff;
+    }
+
+    * {
+        cursor: pointer;
+    }
+
+    label {
+        width: 23%;
+    }
+
+    .cluster-item-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 14px;
+
+        border-radius: 50%;
+    }
+}

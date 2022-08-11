@@ -1,0 +1,39 @@
+.descendant-link {
+  line-height: 32px;
+}
+
+.no-data {
+  font-style: italic;
+  font-size: 12px;
+  color: #a19f9d;
+}
+
+.map-popup-header {
+  h4,
+  .header-description {
+    margin-left: 40px;
+  }
+}
+
+.zone-button {
+  text-align: start;
+  margin: 0 5px 5px 0;
+}
+
+.column-label {
+  max-width: 5rem;
+  min-width: 5rem;
+  font-size: 14px;
+  line-height: 22px;
+
+  .label-description {
+    font-size: 10px;
+    line-height: 16px;
+    color: gray;
+    font-style: italic;
+  }
+}
+
+.add-left-margin {
+  margin-left:45px;
+}

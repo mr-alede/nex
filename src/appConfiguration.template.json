@@ -1,0 +1,14 @@
+{
+    "api_url": "${API_URL}",
+    "frontent_api_url": "${FRONTEND_API_URL}",
+    "map": {
+        "lng": -122.40815609804761,
+        "lat": 37.78884904587787,
+        "style": "mapbox://styles/mr-alede/ckvs2mv2g0nfb16qug5k9lege",
+        "mapbox_api_token": "${MAPBOX_API_TOKEN}"
+    },
+    "auth": {
+        "aadClientId": "${AAD_CLIENT_ID}",
+        "aadAuthority": "${AAD_AUTHORITY}"
+    }
+}

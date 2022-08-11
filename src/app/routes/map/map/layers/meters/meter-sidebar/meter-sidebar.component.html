@@ -1,0 +1,141 @@
+<app-sidebar-animation-container type="meter">
+    <div class="map-sidebar map-sidebar-info">
+        <div class="map-sidebar-header">
+            <h3>Meter: #{{meter?.Name ?? meter?.Id}}</h3>
+
+            <button class="btn-close" (click)="close()">
+            </button>
+        </div>
+
+        <div class="map-sidebar-body">
+            <div>
+                <app-panel-collapse header="General info" [expanded]="true">
+                    <div class="map-sidebar-row">
+                        <label>Meter Type:</label>
+                        <div class="meter-type">{{meter?.Type === meterType.SingleSpot && 'Single Curb Space'
+                            || meter?.Type === meterType.MultiSpot && 'Multi Curb Space'
+                            || meter?.Type === meterType.Unknown && 'Unknown'
+                            || ' '}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.Address">
+                        <label>Address:</label>
+                        <div>{{meter?.Address}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.zone">
+                        <label>Zone:</label>
+                        <div>
+                            <button ngxFluentDesignLinkButton class="meter-button" (click)="openZone()">
+                                {{meter?.zone?.Name}}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="meter?.SpotIds">
+                        <label>Curb Spaces:</label>
+                        <div class="row-value">
+                            <app-spots [spots]="meter?.SpotIds"></app-spots>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.Vendor">
+                        <label>Vendor:</label>
+                        <div>{{meter?.Vendor}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.Model">
+                        <label>Model:</label>
+                        <div>{{meter?.Model}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Geo:</label>
+                        <div *ngIf="!!meterPosition">
+                            <app-geo-coordinates [coordinates]="meterPosition"></app-geo-coordinates>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.HoursOfOperation">
+                        <label>Operation hours:</label>
+                        <div>{{meter?.HoursOfOperation}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row" *ngIf="!!meter?.MaxTime">
+                        <label>Maximum time:</label>
+                        <div>{{meter?.MaxTime}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row more-info">
+                        <button ngxFluentDesignLinkButton class="more-info-button"
+                            [disabled]="(mapState.popupVisible$ | async)" (click)="mapView()"> Map View
+                        </button>
+                    </div>
+                </app-panel-collapse>
+
+                <app-panel-collapse *ngIf="meter?.transactions?.length" header="Transactions" [expanded]="false">
+                    <ng-container>
+                        <table class="table table-borderless table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 60px;">Date / Time</th>
+                                    <th scope="col" style="width: 60px;">Paid by</th>
+                                    <th scope="col" style="width: 40px;">Event</th>
+                                    <th scope="col" style="width: 40px;">Dur.</th>
+                                    <th scope="col" style="width: 40px;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of meter?.transactions">
+                                    <td>{{item.SessionStart | amDateFormat:'MM/DD/YYYY hh:mm a'}}</td>
+                                    <td>
+                                        {{item.PaymentMethod === paymentMethod.Unknown && 'Unknown'
+                                        || item.PaymentMethod === paymentMethod.Cash && 'Cash'
+                                        || item.PaymentMethod === paymentMethod.CreditDebitCard && 'Credit Card'
+                                        || item.PaymentMethod === paymentMethod.CashAndCreditDebitCard && 'Cash & Credit
+                                        Card'
+                                        || item.PaymentMethod === paymentMethod.SmartCard && 'Smart Card'
+                                        || item.PaymentMethod === paymentMethod.PayByCell && 'Cell'
+                                        || item.PaymentMethod === paymentMethod.RemotePBP && 'Remote PBP'
+                                        || item.PaymentMethod === paymentMethod.TechCard && 'Tech Card'
+                                        || ' '}}
+                                    </td>
+                                    <td title="{{item.MeterEventType === meterEventType.Unknown && 'Unknown'
+                                    || item.MeterEventType === meterEventType.NewSession && 'New Session'
+                                    || item.MeterEventType === meterEventType.AdditionalTime && 'Additional time'
+                                    || item.MeterEventType === meterEventType.StatusChange && 'Status changed'
+                                    || null}}">
+                                        {{item.MeterEventType === meterEventType.Unknown && 'U'
+                                        || item.MeterEventType === meterEventType.NewSession && 'NS'
+                                        || item.MeterEventType === meterEventType.AdditionalTime && 'AT'
+                                        || item.MeterEventType === meterEventType.StatusChange && 'SC'
+                                        || ' '}}
+                                    </td>
+                                    <td>{{item.SessionStart | appDiffMinutes: item.SessionEnd}}</td>
+                                    <td>${{item.GrossPaid | number : '1.2'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="map-sidebar-row more-info">
+                            <button ngxFluentDesignLinkButton class="more-info-button"
+                                (click)="transactionsMoreInfo()">More Info </button>
+                        </div>
+                    </ng-container>
+                </app-panel-collapse>
+
+                <app-panel-collapse *ngIf="meter?.revenue" header="Revenue" [expanded]="false">
+                    <ng-container>
+                        <app-revenue-table [revenue]="meter?.revenue">
+                        </app-revenue-table>
+
+                        <div class="map-sidebar-row more-info">
+                            <app-revenue-more-info [meterId]="meter?.Id"></app-revenue-more-info>
+                        </div>
+                    </ng-container>
+                </app-panel-collapse>
+
+            </div>
+        </div>
+    </div>
+</app-sidebar-animation-container>

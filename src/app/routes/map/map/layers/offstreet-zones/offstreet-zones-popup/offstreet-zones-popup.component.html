@@ -1,0 +1,41 @@
+<div class="map-popup-header">
+  <span class="offstreet-zone-icon"></span>
+  <h4>{{_offstreetZone?.Name}}</h4>
+  <span class="header-description">Off-street parking</span>
+</div>
+
+<div class="map-popup-body">
+
+  <div class="map-popup-row">
+    <label>Address:</label>
+    <div class="row-value">{{_offstreetZone?.Address}}</div>
+  </div>
+
+  <div class="map-popup-row">
+    <label>District:</label>
+    <div class="row-value">
+      <button ngxFluentDesignLinkButton (click)="areaClick(_offstreetZone?.area)" style="text-align:left;">
+        {{_offstreetZone?.area?.Name}}
+      </button>
+    </div>
+  </div>
+
+  <div class="map-popup-row">
+    <label>Vendor:</label>
+    <div class="row-value">
+      {{_offstreetZone?.Vendor}}
+    </div>
+  </div>
+
+  <div class="map-popup-row" *ngIf="(_offstreetZone?.SpotsCount ?? 0) > 0">
+    <label>Spaces count:</label>
+    <div class="row-value">
+      {{_offstreetZone?.SpotsCount}}
+    </div>
+  </div>
+
+  <div class="map-popup-row more-info">
+    <button ngxFluentDesignLinkButton (click)="moreInfo()"
+      [disabled]="(mapStateService.sidebarVisible$ | async) === 'offstreet-zone'"> More info </button>
+  </div>
+</div>

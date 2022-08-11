@@ -1,0 +1,71 @@
+@import 'styles/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/containers';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/dropdown';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/list-group';
+
+@import '~bootstrap/scss/utilities'; // Configures the utility classes that should be generated
+@import '~bootstrap/scss/utilities/api'; // Generates the actual utility classes
+
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~mapbox-gl/dist/mapbox-gl.css';
+@import '~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css';
+
+@import '~ngx-toastr/toastr';
+
+@import '../node_modules/ngx-fluent-design/src/lib/styles';
+@import './styles/fluent-design-theme';
+
+@import '~@ng-select/ng-select/themes/default.theme.css';
+
+@import './styles/ng-select';
+@import './styles/map/styles';
+@import './styles/bootstrap/styles';
+@import './styles//icons/';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.ngx-fluent-design-link-button {
+    border: none !important;
+
+    &.active,
+    &:hover {
+        text-decoration: none !important;
+        border: none !important;
+        filter: brightness(85%);
+    }
+
+    &:focus {
+        text-decoration: none !important;
+        border: none !important;
+        filter: brightness(85%);
+    }
+}

@@ -1,0 +1,15 @@
+<mgl-geojson-source id="signs-source" [data]="signs" [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="signs-layer" type="symbol" source="signs-source" [layout]="(layouts$ | async)?.signs"
+    [paint]="paints.signs" (layerClick)="onSignClick($event)" (layerMouseEnter)="layerMouseEnter()"
+    (layerMouseLeave)="layerMouseLeave()">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!selectedSignFeature" [feature]="selectedSignFeature" [className]="'sign-popup'" [maxWidth]="'395px'"
+    (close)="mapState.closePopup(); popupOpen = false" (open)="mapState.openPopup(); popupOpen = true">
+    <app-sign-popup [sign]="sign$ | async"></app-sign-popup>
+
+    <div class="dialog-background" *ngIf="busy">
+        <app-wait-indicator></app-wait-indicator>
+    </div>
+</mgl-popup>

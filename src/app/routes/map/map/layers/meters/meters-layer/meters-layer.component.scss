@@ -1,0 +1,38 @@
+.map-popup-header {
+
+    h4,
+    .meter-type {
+        margin-left: 40px;
+    }
+}
+
+.cluster-item {
+    .cluster-item-icon {
+
+        background-color: gray;
+
+        &.Commercial {
+            background-color: yellow;
+        }
+
+        &.ShortTerm {
+            background-color: green;
+        }
+
+        &.Motorcycle {
+            background-color: black;
+        }
+
+        &.TourBus {
+            background-color: brown;
+        }
+
+        &.SixWheeled {
+            background-color: red;
+        }
+
+        &.BoatTrailer {
+            background-color: violet;
+        }
+    }
+}

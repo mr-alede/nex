@@ -1,0 +1,241 @@
+$background: hsla(0, 0%, 100%, .75);
+$legendWidth: 201px;
+
+:host {
+    display: block;
+    position: relative;
+    height: calc(100vh - 52px);
+}
+
+mgl-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+div.interface-version {
+    position: relative;
+    bottom: -7px;
+;
+    display: inline-block;
+
+    .interface-version-description {
+        font-size: 14px;
+        line-height: 18px;
+        opacity: 0.7;
+    }
+}
+
+.btn {
+    background-color: $background;
+    border-radius: 0.3rem;
+    border-bottom-color: #b9b8b8;
+    border-left-color: #b9b8b8;
+    border-right-color: #b9b8b8;
+    border-top-color: #b9b8b8;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.legend {
+    background-color: $background;
+    min-width: $legendWidth;
+    border-radius: 0.3rem;
+
+    >* {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 10px;
+    }
+
+    >:first-child {
+        padding-top: 10px;
+    }
+
+    .legend-header {
+        border-bottom: 1px solid lightgrey;
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .legend-group-header {
+        font-weight: bold;
+    }
+
+    .legend-heatmap {
+      display: flex;
+      flex-flow: column;
+
+      .legend-heatmap-description {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+      }
+    }
+
+    .legend-item {
+        img {
+            margin-left: -3px;
+            margin-right: 7px;
+            max-width: 16px;
+            height: auto;
+            position: relative;
+            bottom: 0px;
+        }
+
+        .item {
+            border-radius: 50%;
+            width: 11px;
+            height: 11px;
+            display: inline-block;
+            margin-right: 8px;
+            position: relative;
+            top: 1.5px;
+        }
+
+        .traffic-item {
+            border-radius: 1px;
+            width: 11px;
+            height: 4px;
+            display: inline-block;
+            margin-right: 8px;
+            position: relative;
+            top: -1px;
+        }
+
+        .spot-item {
+            position: relative;
+
+            &:after {
+                content: ' ';
+                position: absolute;
+                top: calc(50% - 1.5px);
+                left: calc(50% - 1.5px);
+                display: block;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.item-green {
+    background-color: #00B62D;
+
+    &.spot-item {
+        background-color: hsl(135, 100%, 36%, 30%);
+
+        &:after {
+            background-color: #204E00;
+        }
+    }
+}
+
+.item-yellow {
+    background-color: #cccc00;
+
+    &.spot-item {
+        background-color: hsl(60, 100%, 40%, 30%);
+
+        &:after {
+            background-color: #FEFF00;
+        }
+    }
+}
+
+.item-red {
+    background-color: red;
+
+    &.spot-item {
+        background-color: hsl(0, 100%, 50%, 30%);
+
+        &:after {
+            background-color: #DE4006;
+        }
+    }
+}
+
+.item-black {
+    background-color: #262626;
+}
+
+.item-grey {
+    background-color: grey;
+
+    &.spot-item {
+        background-color: hsl(60, 0%, 0%, 30%);
+
+        &:after {
+            background-color: #262626;
+        }
+    }
+}
+
+.item-blue {
+    background-color: blue;
+}
+
+.item-white {
+    background-color: white;
+}
+
+.item-brown {
+    background-color: brown;
+}
+
+.item-purple {
+    background-color: purple;
+}
+
+.item-low {
+    background-color: hsl(145, 95%, 30%);
+}
+
+.item-moderate {
+    background-color: hsl(30, 100%, 42%);
+}
+
+.item-heavy {
+    background-color: hsl(355, 100%, 37%);
+}
+
+.item-severe {
+    background-color: hsl(355, 70%, 22%);
+}
+
+.revenue-interval {
+    background-color: $background;
+    min-width: $legendWidth;
+    border-radius: 0.3rem;
+}
+
+.revenue-interval-header {
+    font-weight: bold;
+    font-size: 0.855rem;
+    padding: 8px;
+
+    i {
+        color: #0d6efd;
+    }
+}
+
+.revenue-interval-body {
+    text-align: center;
+    font-size: 19px;
+    padding: 5px;
+    background-color: white;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    cursor: pointer;
+
+    input.form-control {
+        cursor: pointer;
+        background-color: white;
+        border: none;
+    }
+}

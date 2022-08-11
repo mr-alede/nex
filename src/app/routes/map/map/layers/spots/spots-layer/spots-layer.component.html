@@ -1,0 +1,39 @@
+<mgl-geojson-source id="spots-source" [data]="spots" [generateId]="true">
+</mgl-geojson-source>
+<mgl-layer id="spots-layer" type="circle" source="spots-source" [layout]="(layouts$ | async)?.spots"
+  [paint]="paints.spots" (layerClick)="onSpotClick($event)" (layerMouseEnter)="layerMouseEnter()"
+  (layerMouseLeave)="layerMouseLeave()" [before]="'building-extrusion'">
+</mgl-layer>
+<mgl-layer id="spots-layer-points" type="circle" source="spots-source" [layout]="(layouts$ | async)?.spots"
+  [paint]="paints.spotsPoints" [before]="'building-extrusion'">
+</mgl-layer>
+<mgl-layer id="spots-layer-logos" type="symbol" source="spots-source" #spotsSource
+  [layout]="(layouts$ | async)?.spotsLogos" [paint]="paints.spotsLogos" (layerClick)="onSpotClick($event)"
+  (layerMouseEnter)="layerMouseEnter()" (layerMouseLeave)="layerMouseLeave()" [before]="'building-extrusion'">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!clusterFeatures && clusterFeatures.length > 1" [lngLat]="clusterCenter" [className]="'spot-popup'"
+  [maxWidth]="'281px'">
+  <div class="map-popup-header">
+    <app-spot-icon></app-spot-icon>
+    <h4>Curb Spaces</h4>
+  </div>
+
+  <div class="map-popup-body">
+    <div *ngFor="let item of clusterFeatures;" (click)="onClusterItemClick(item)" class="map-popup-row cluster-item">
+      <span class="cluster-item-icon" [class]="item?.properties?.policy"></span>
+      <label>Status: </label>
+      <span class="row-value">{{item?.properties?.status}} </span>
+    </div>
+  </div>
+</mgl-popup>
+
+<mgl-popup style="width: 280px" *ngIf="!!selectedSpot" [feature]="selectedSpot" [className]="'spot-popup'"
+  [maxWidth]="'334px'" (close)="mapState.closePopup(); popupOpen = false"
+  (open)="mapState.openPopup(); popupOpen = true">
+  <app-spot-popup [spot]="spot$ | async"></app-spot-popup>
+
+  <div class="dialog-background" *ngIf="busy">
+    <app-wait-indicator></app-wait-indicator>
+  </div>
+</mgl-popup>

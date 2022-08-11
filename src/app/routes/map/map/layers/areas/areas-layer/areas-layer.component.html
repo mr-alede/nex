@@ -1,0 +1,22 @@
+<mgl-geojson-source id="areas" [data]="areas" [generateId]="true">
+</mgl-geojson-source>
+
+<mgl-layer (layerClick)="onAreaClick($event)" id="areas-fill" type="fill" source="areas"
+  [layout]="(layouts$ | async)?.areas" [paint]="paints.areas_fill">
+</mgl-layer>
+<mgl-layer id="areas-layer" type="line" source="areas" [layout]="(layouts$ | async)?.areas"
+  [paint]="paints.areas_lines">
+</mgl-layer>
+<mgl-layer id="areas_lables" type="symbol" source="areas" [layout]="(layouts$ | async)?.areas_lables"
+  [paint]="paints.areas_lables">
+</mgl-layer>
+
+<mgl-popup *ngIf="!!selectedAreaGeo" [feature]="selectedAreaGeo" [className]="'area-popup'"
+  (close)="mapState.closePopup(); popupOpen = false" (open)="mapState.openPopup(); popupOpen = true"
+  [maxWidth]="'496px'">
+  <app-area-popup [area]="area$ | async" [areaTypes]="areaTypes$ | async"></app-area-popup>
+
+  <div class="dialog-background" *ngIf="busy">
+    <app-wait-indicator></app-wait-indicator>
+  </div>
+</mgl-popup>

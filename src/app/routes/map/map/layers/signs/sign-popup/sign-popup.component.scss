@@ -1,0 +1,41 @@
+@import '../../../../../../../styles/variables';
+
+app-picture {
+    width: 106px;
+    margin-bottom: 5px;
+    min-height: 71px;
+}
+
+.sign-rows {
+    display: flex;
+    flex-direction: row;
+}
+
+.right-column {
+    margin-left: 15px;
+    flex-grow: 1;
+}
+
+.map-popup-header {
+    h4,
+    app-sign-status {
+        margin-left: 40px;
+    }
+}
+
+.map-popup-row {
+    >label {
+        width: 36%;
+        color: $textColorLight;
+    }
+
+    .row-value {
+        width: 64%;
+    }
+
+    margin: 0;
+}
+
+.state-updated {
+    color: #A4A6AA;
+}

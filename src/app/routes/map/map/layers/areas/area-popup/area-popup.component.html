@@ -1,0 +1,50 @@
+<div class="map-popup-header">
+  <span class="area-icon"></span>
+  <h4>{{area?.typeName}}: {{area?.Name}}</h4>
+  <div class="header-description" *ngIf="isNotEmptyChildren">
+    <span *ngFor="let area of areaCounts; let last = last">
+      {{areaTypes && areaTypes[area.typeId] ? areaTypes[area.typeId].pluralName : area.name}}{{': ' + area.descendants.length}}{{last ? '' : ' |'}}
+    </span>
+  </div>
+</div>
+
+<div class="map-popup-body">
+
+  <ng-container *ngIf="isNotEmptyChildren">
+    <div class="map-popup-row" *ngFor="let area of areaCounts; let i = index">
+
+      <app-panel-collapse class="panel-title"
+                          [header]="areaTypes && areaTypes[area.typeId] ? areaTypes[area.typeId].pluralName : ''"
+                          [expanded]="false">
+      <span class="map-sidebar-row descendant-link" *ngFor="let child of area.descendants">
+        <button ngxFluentDesignLinkButton (click)="subDistrictClick(child.Id, child.TypeId)">{{child?.Name}}</button>
+      </span>
+      </app-panel-collapse>
+
+    </div>
+  </ng-container>
+
+  <div class="map-popup-row" *ngIf="area?.zoneNames?.length">
+    <div class="column-label" [ngClass]="{'add-left-margin': isNotEmptyChildren}">
+      <label>Zones:</label>
+      <div class="label-description">{{area?.zoneNames?.length}} {{area?.zoneNames?.length === 1 ? "item" : "items"}}</div>
+    </div>
+    <div class="row-value" style="width: 100%">
+      <button class="zone-button" ngxFluentDesignLinkButton *ngFor="let zone of area?.zoneNames?.slice(0,5); let last = last" (click)="openZone(zone.Id)">
+        <span>{{zone.Name}}</span>
+        <label *ngIf="!last">,</label>
+      </button>
+      <label *ngIf="(area?.zoneNames?.length ?? 0) > 5">...</label>
+    </div>
+  </div>
+
+  <div class="map-popup-row no-data" *ngIf="!isNotEmptyChildren && !area?.zoneNames?.length">
+    No sub-areas available
+  </div>
+
+  <div class="map-popup-row more-info">
+    <button ngxFluentDesignLinkButton (click)="moreInfo()"
+            [disabled]="(mapState.sidebarVisible$ | async) === 'area'">More info
+    </button>
+  </div>
+</div>

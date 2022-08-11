@@ -1,0 +1,27 @@
+.map-popup-header {
+
+    h4,
+    .meter-type {
+        margin-left: 40px;
+    }
+}
+
+.cluster-item {
+    .cluster-item-icon {
+
+        background-color: #262626;
+        opacity: 0.6;
+
+        &.Busy {
+            background-color: #DE4006;
+        }
+
+        &.Vacant {
+            background-color: #204E00;
+        }
+
+        &.Booked {
+            background-color: #FEFF00;
+        }
+    }
+}

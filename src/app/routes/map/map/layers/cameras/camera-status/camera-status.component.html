@@ -1,0 +1,4 @@
+<div class="camera-status"
+    [class]="status === cameraStatus.Active && 'active' || status === cameraStatus.Inactive && 'inactive' || status === cameraStatus.Offline && 'offline' || ''">
+    {{ (status) ? status : '' }}
+</div>

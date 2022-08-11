@@ -1,0 +1,14 @@
+<div class="items-container">
+    <a class="item revenue-item" routerLink="/reports/revenue">
+        <img src="../../../../assets/reports/revenue.svg">
+        <span>Revenue</span>
+    </a>
+    <a class="item camera-item" routerLink="/reports/cameras">
+        <img src="../../../../assets/reports/cameras.svg">
+        <span>Camera Events</span>
+    </a>
+    <a class="item garages-item" routerLink="/reports/command-center" *ngIf="cityCode === 'LSV'">
+        <img src="../../../../assets/reports/incidents.svg">
+        <span>Command Center</span>
+    </a>
+</div>

@@ -1,0 +1,65 @@
+<app-sidebar-animation-container type="area">
+  <div class="map-sidebar map-sidebar-info">
+    <div class="map-sidebar-header">
+      <h3>{{area?.typeName}}: {{area?.Name}}</h3>
+      <button class="btn-close" (click)="close()">
+      </button>
+    </div>
+
+
+    <div class="map-sidebar-body">
+      <div>
+        <app-panel-collapse header="General info" [expanded]="true">
+          <ng-container *ngIf="isNotEmptyChildren">
+            <div class="map-sidebar-row general-info" *ngFor="let area of areaCounts">
+              <label>{{areaTypes && areaTypes[area.typeId] ? areaTypes[area.typeId].pluralName : area.name}} count:</label>
+              <div>{{area.descendants.length}}</div>
+            </div>
+          </ng-container>
+
+          <div class="map-sidebar-row general-info" *ngIf="area?.zoneNames?.length">
+            <label>Zones count:</label>
+            <div>
+              {{area?.zoneNames?.length}}
+            </div>
+          </div>
+
+          <div *ngIf="!isNotEmptyChildren && !area?.zoneNames?.length" class="no-data">
+            No sub-areas available
+          </div>
+
+          <div class="map-sidebar-row more-info">
+            <button ngxFluentDesignLinkButton class="more-info-button" [disabled]="(mapState.popupVisible$ | async)" (click)="mapView()"> Map View </button>
+          </div>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="area?.revenue" header="Revenue" [expanded]="false">
+          <ng-container *ngIf="area?.revenue; else noDataTemplate">
+            <app-revenue-table [revenue]="area?.revenue"></app-revenue-table>
+
+            <div class="map-sidebar-row more-info">
+              <app-revenue-more-info [areaId]="area?.Id"></app-revenue-more-info>
+            </div>
+          </ng-container>
+
+          <ng-template #noDataTemplate class="no-data">
+            No data available
+          </ng-template>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="area?.zoneNames?.length" header="Zones" [expanded]="false">
+          <div class="zones-container" *ngIf="area?.zoneNames?.length">
+            <button class="zone-button" ngxFluentDesignLinkButton *ngFor="let zone of area?.zoneNames; let last = last" (click)="openZone(zone.Id)">
+              <span>{{zone.Name}}</span>
+              <label *ngIf="!last">,</label>
+            </button>
+          </div>
+
+          <div *ngIf="!area?.zoneNames?.length" class="no-data">
+            No data available
+          </div>
+        </app-panel-collapse>
+      </div>
+    </div>
+  </div>
+</app-sidebar-animation-container>

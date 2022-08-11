@@ -1,0 +1,24 @@
+<table class="table table-borderless table-sm" *ngIf="revenue">
+
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Current</th>
+      <th scope="col">Previous</th>
+      <th scope="col">Change</th>
+      <th scope="col">Forecast</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of revenueTable">
+      <td>{{item.name}}:</td>
+      <td>{{item.revenue?.Current}}</td>
+      <td>{{item.revenue?.Previous}}</td>
+
+      <td [style.color]="(item.revenue?.Current || 0) > (item.revenue?.Previous || 0) ? '#107C10' : '#D13438'">
+        {{changeCalculator(item.revenue?.Change)}}%
+      </td>
+      <td>{{item.revenue?.Forecast}}</td>
+    </tr>
+  </tbody>
+</table>

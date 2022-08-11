@@ -1,0 +1,120 @@
+<app-sidebar-animation-container type="zone">
+  <div class="map-sidebar map-sidebar-info">
+    <div class="map-sidebar-header">
+      <h3>Zone: {{zone?.Name}}</h3>
+
+      <button class="btn-close" (click)="close()">
+      </button>
+    </div>
+
+    <div class="map-sidebar-body">
+      <div>
+        <app-panel-collapse header="General info" [expanded]="true">
+          <div class="map-sidebar-row">
+            <label>Zone:</label>
+            <div>
+              {{zone?.Name}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Vacant:</label>
+            <div>
+              {{spotsCountsByState?.vacant}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Booked:</label>
+            <div>
+              {{spotsCountsByState?.booked}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row">
+            <label>Occupied:</label>
+            <div>
+              {{spotsCountsByState?.occupied}}
+            </div>
+          </div>
+
+          <div class="map-sidebar-row" *ngIf="zone?.area">
+            <label>{{zone?.area | areaTypeName | async}}:</label>
+            <div>
+              <button ngxFluentDesignLinkButton class="zone-button" (click)="openArea()">
+                {{zone?.area?.Name}}
+              </button>
+            </div>
+          </div>
+
+          <div class="map-sidebar-row more-info">
+            <button ngxFluentDesignLinkButton class="more-info-button" [disabled]="(mapState.popupVisible$ | async)"
+              (click)="mapView()"> Map View </button>
+          </div>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="zone?.revenue" header="Revenue" [expanded]="false">
+          <ng-container *ngIf="zone?.revenue; else noDataTemplate">
+            <app-revenue-table [revenue]="zone?.revenue"></app-revenue-table>
+
+            <div class="map-sidebar-row more-info">
+              <app-revenue-more-info [zoneId]="zone?.Id"></app-revenue-more-info>
+            </div>
+          </ng-container>
+
+          <ng-template #noDataTemplate class="no-data">
+            No data available
+          </ng-template>
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="!!(cameraStatesWithPictureUrl$ | async)" header="Cameras" [expanded]="false">
+
+          <div class="map-sidebar-row-value-wrap" style="margin-left: 5px">
+            <div class="row-value" *ngFor="let camera of cameraStatesWithPictureUrl$ | async">
+              <app-picture (click)="openCamera(camera.CameraId)" class="camera-picture"
+                [url]="camera.PictureUrl | appAddAuthToken | async"></app-picture>
+              <div class="pic-info"><span
+                  [style.color]="camera?.Status === cameraStatus.Active ? 'green' : 'grey'">{{camera?.Status ===
+                  cameraStatus.Active ? 'Active' :
+                  'Not Active'}}</span>
+              </div>
+              <div class="pic-info"><span>{{camera.LastUpdated | amDateFormat:'hh:mm a'}}</span></div>
+            </div>
+          </div>
+
+        </app-panel-collapse>
+
+        <app-panel-collapse *ngIf="zone?.spotsStates" header="Curb Spaces" [expanded]="false">
+
+          <div class="map-sidebar-row-value-wrap" style="margin-left: 5px">
+            <app-spots style="margin-bottom: 10px" *ngFor="let state of zone?.spotsStates" [spots]="[state.SpotId]">
+            </app-spots>
+          </div>
+
+        </app-panel-collapse>
+
+
+
+        <app-panel-collapse header="Sign" [expanded]="false" *ngIf="!!(signsWithPictureUrl$ | async)">
+
+          <div>
+
+            <div class="map-sidebar-row-value-wrap">
+              <div class="row-value" *ngFor="let sign of signsWithPictureUrl$ | async">
+                <app-picture class="sign-picture" *ngIf="sign?.PictureUrl"
+                  [url]="sign.PictureUrl | appAddAuthToken | async"></app-picture>
+                <div class="pic-info"><span
+                    [style.color]="sign?.Status === signStatus.Active ? 'green' : 'grey'">{{sign?.Status ===
+                    signStatus.Active ? 'Active'
+                    : 'Not Active'}}</span>
+                </div>
+                <div class="pic-info"><span>{{sign?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+              </div>
+            </div>
+          </div>
+
+        </app-panel-collapse>
+      </div>
+    </div>
+  </div>
+</app-sidebar-animation-container>

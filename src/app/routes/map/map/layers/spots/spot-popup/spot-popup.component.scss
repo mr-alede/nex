@@ -1,0 +1,45 @@
+@import '../../../../../../../styles/variables';
+
+.row-value {
+  .sign-picture {
+    width: 35px;
+  }
+
+  .camera-picture {
+    width: 65px;
+    height: 40px;
+  }
+}
+
+.spot-description {
+  color: $textColorLight;
+  font-size: 12px;
+}
+
+.map-popup-header {
+
+  h4,
+  .spot-description {
+    margin-left: 40px;
+  }
+}
+
+.row-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #A19F9D;
+  text-transform: uppercase;
+}
+
+.spot-button {
+  text-align: start;
+}
+
+app-spots-states {
+  display: inline-block;
+  font-size: 12px;
+}
+
+.meter-button {
+  margin: 0 5px 5px 0;
+}

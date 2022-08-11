@@ -1,0 +1,82 @@
+<ul class="list-group1">
+    <li>
+        <a class="nav-link nav-section" routerLinkActive="active" routerLink="/reports/revenue">
+            <i class="bi bi-chevron-up"></i>
+            Revenue
+        </a>
+        <ul>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/revenue/overview">Overview</a>
+            </li>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/revenue/analysis">Revenue
+                    Analysis</a>
+            </li>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/revenue/transactions">Transaction
+                    Analysis</a>
+            </li>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/revenue/grid-view">Grid View</a>
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a class="nav-link nav-section" routerLinkActive="active" routerLink="/reports/cameras">
+            <i class="bi bi-chevron-up"></i>
+            Camera Events
+        </a>
+        <ul>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/cameras/overview">Overview</a>
+            </li>
+            <li>
+                <a class="nav-link" routerLinkActive="active" routerLink="/reports/cameras/grid-view">Grid View</a>
+            </li>
+        </ul>
+    </li>
+
+    <li *ngIf="cityCode === 'LSV'">
+        <a class="nav-link nav-section" routerLinkActive="active" routerLink="/reports/command-center">
+            <i class="bi bi-chevron-up"></i>
+            Command Center
+        </a>
+        <ul>
+            <li>
+                <a class="nav-link" routerLinkActive="active"
+                    routerLink="/reports/command-center/dashboard">Dashboard</a>
+            </li>
+
+            <li>
+                <a class="nav-link nav-section" routerLinkActive="active"
+                    routerLink="/reports/command-center/incidents">
+                    <i class="bi bi-chevron-up"></i>
+                    Incidents
+                </a>
+                <ul>
+                    <li>
+                        <a class="nav-link" routerLinkActive="active"
+                            routerLink="/reports/command-center/incidents/by-location">By Location</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLinkActive="active"
+                            routerLink="/reports/command-center/incidents/by-months">By Months</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLinkActive="active"
+                            routerLink="/reports/command-center/incidents/by-value">By Value</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLinkActive="active"
+                            routerLink="/reports/command-center/incidents/agent-metrics">Agent Metrics</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLinkActive="active"
+                            routerLink="/reports/command-center/incidents/call-stats">Call Stats</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,9 @@
+<ng-container *ngIf="spotsStates">
+  <div [ngSwitch]="spotsStates[0]?.Status">
+    <div *ngSwitchCase="'Vacant'" class="spot-status--vacant">Free</div>
+    <div *ngSwitchCase="'Occupied'" class="spot-status--occupied">Busy</div>
+    <div *ngSwitchCase="'Booked'" class="spot-status--booked">Booked</div>
+    <div *ngSwitchDefault>Not Monitored</div>
+  </div>
+</ng-container>
+

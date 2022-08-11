@@ -1,0 +1,27 @@
+.spot-icon {
+    background-image: url(../../../../../../../assets/spots/spot-general.svg);
+
+    &.boat-trailer {
+        background-image: url(../../../../../../../assets/spots/spot-boat.svg);
+    }
+
+    &.commercial {
+        background-image: url(../../../../../../../assets/spots/spot-commercial.svg);
+    }
+
+    &.moto {
+        background-image: url(../../../../../../../assets/spots/spot-moto.svg);
+    }
+
+    &.short-term {
+        background-image: url(../../../../../../../assets/spots/spot-short-term.svg);
+    }
+
+    &.six-wheeled {
+        background-image: url(../../../../../../../assets/spots/spot-six-wheeled.svg);
+    }
+
+    &.tour-bus {
+        background-image: url(../../../../../../../assets/spots/spot-tourbus.svg);
+    }
+}

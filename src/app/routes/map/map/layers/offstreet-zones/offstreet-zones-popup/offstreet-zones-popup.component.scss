@@ -1,0 +1,13 @@
+@import '../../../../../../../styles/variables';
+
+.map-popup-header {
+    h4,
+    .header-description {
+        margin-left: 40px;
+    }
+
+    .header-description {
+        color: $textColorLight;
+        min-height: 20px;
+    }
+}

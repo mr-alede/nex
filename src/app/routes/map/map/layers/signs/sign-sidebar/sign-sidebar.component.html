@@ -1,0 +1,106 @@
+<app-sidebar-animation-container type="sign">
+    <div class="map-sidebar map-sidebar-info">
+        <div class="map-sidebar-header">
+            <h3>Sign: #{{sign?.Id}}</h3>
+
+            <button class="btn-close" (click)="close()">
+            </button>
+        </div>
+
+        <div class="map-sidebar-body">
+            <div>
+                <app-panel-collapse header="General info" [expanded]="true">
+                    <div class="map-sidebar-row">
+                        <label>Device ID:</label>
+                        <div>{{sign?.Id}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Status:</label>
+                        <div>
+                            <app-sign-status [status]="sign?.state?.Status"></app-sign-status>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Address:</label>
+                        <div>{{sign?.Address}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Zone:</label>
+                        <div>
+                            <button ngxFluentDesignLinkButton (click)="openZone()">
+                                {{sign?.ZoneId}}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Geo:</label>
+                        <div *ngIf="!!sign?.Position">
+                            <app-geo-coordinates [coordinates]="sign?.Position"></app-geo-coordinates>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row more-info">
+                        <button ngxFluentDesignLinkButton class="more-info-button"
+                            [disabled]="(mapState.popupVisible$ | async)" (click)="mapView()"> Map View </button>
+                    </div>
+                </app-panel-collapse>
+
+                <app-panel-collapse header="Display" [expanded]="false">
+                    <div class="map-sidebar-row pic-row">
+                        <app-picture [url]="pictureUrl | appAddAuthToken | async"></app-picture>
+                        <div class="pic-info">Led color: <span [style.color]="ledColor">{{ledColor}}</span></div>
+                    </div>
+                </app-panel-collapse>
+
+                <app-panel-collapse header="Telemetry" (expandedChange)="telemetryExpanded($event)"
+                    [expanded]="telemetryPanelExpanded">
+                    <div class="spiner-container">
+                        <div *ngIf="!!telemetry">
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.Firmware">
+                                <label>Firmware:</label>
+                                <div>{{telemetry?.Firmware}}</div>
+                            </div>
+
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.State">
+                                <label>State:</label>
+                                <div>{{telemetry?.State}}</div>
+                            </div>
+
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.Battery">
+                                <label>Battery:</label>
+                                <div>{{telemetry?.Battery}} Am</div>
+                            </div>
+
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.RSSI">
+                                <label>RSSI:</label>
+                                <div>{{telemetry?.RSSI}} dBm</div>
+                            </div>
+
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.Light">
+                                <label>Light:</label>
+                                <div>{{telemetry?.Light}}%</div>
+                            </div>
+
+                            <div class="map-sidebar-row" *ngIf="!!telemetry?.LastUpdated">
+                                <label>Last update:</label>
+                                <div>{{telemetry?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!telemetry && !busy" class="no-telemetry">
+                            No data available
+                        </div>
+
+                        <div class="wait-indicator-container" *ngIf="busy">
+                            <app-wait-indicator></app-wait-indicator>
+                        </div>
+                    </div>
+                </app-panel-collapse>
+            </div>
+        </div>
+    </div>
+</app-sidebar-animation-container>

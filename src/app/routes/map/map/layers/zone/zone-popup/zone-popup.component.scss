@@ -1,0 +1,79 @@
+@import 'src/styles/variables';
+
+.zone-spots-status {
+  min-height: 20px;
+
+  .zone-spots-status--vacant {
+    color: $spotOccupancyStatusVacancy;
+    &::after {
+      content: " | ";
+      color: gray;
+    }
+  }
+  .zone-spots-status--booked {
+    color: $spotOccupancyStatusBooked;
+    &::after {
+      content: " | ";
+      color: gray;
+    }
+  }
+  .zone-spots-status--occupied {
+    color: $spotOccupancyStatusOccupied;
+  }
+}
+.spot-status {
+  display: block;
+  width: 25px;
+  height: 15px;
+  position: relative;
+  top: 6px;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+
+.column-label {
+  max-width: 6rem;
+  min-width: 6rem;
+  font-size: 14px;
+  line-height: 22px;
+  margin-right: 15px;
+
+  .label-description {
+    font-size: 10px;
+    line-height: 16px;
+    color: gray;
+    font-style: italic;
+  }
+}
+.row-value {
+  width: 7em;
+  .meter-button {
+    margin: 0 5px 5px 0;
+  }
+  .sign-picture {
+    width: 75px;
+  }
+  .camera-picture {
+    width: 65px;
+    height: 40px;
+  }
+}
+.row-value-wrap {
+  flex-wrap: wrap;
+}
+
+.row-zone-button {
+  width: auto;
+  button {
+    text-align: start;
+  }
+}
+
+.map-popup-header {
+  h4,
+  .zone-spots-status {
+    margin-left: 40px;
+  }
+}

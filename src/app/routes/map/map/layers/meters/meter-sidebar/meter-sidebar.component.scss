@@ -1,0 +1,22 @@
+.spiner-container {
+    position: relative;
+}
+
+table {
+    width: 100%;
+
+    td,
+    th {
+        font-size: 12px;
+    }
+}
+
+.no-data {
+    font-style: italic;
+    font-size: 12px;
+    color: #a19f9d;
+}
+
+.meter-button {
+  text-align: start;
+}

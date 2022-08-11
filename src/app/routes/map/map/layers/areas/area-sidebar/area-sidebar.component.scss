@@ -1,0 +1,24 @@
+.no-data {
+    font-style: italic;
+    font-size: 12px;
+    color: #a19f9d;
+}
+
+.general-info {
+    > label {
+        width: 60%;
+    }
+
+    > div {
+        width: 40%;
+    }
+}
+
+.zone-button {
+  text-align: start;
+  margin: 0 5px 5px 0;
+}
+
+.zones-container {
+  margin-left: 20px;
+}

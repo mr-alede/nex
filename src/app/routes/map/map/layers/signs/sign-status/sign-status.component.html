@@ -1,0 +1,5 @@
+<div class="sign-status" [class]="status === signStatus.Active ? 'active' : 'inactive'">
+    {{status === signStatus.Inactive && 'Inactive'
+    || status === signStatus.Active
+    || ' '}}
+</div>

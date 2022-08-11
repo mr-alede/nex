@@ -1,0 +1,83 @@
+@import 'src/styles/variables';
+
+:host {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+.policy-label {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 3px;
+  justify-content: center;
+
+  border: none !important;
+
+  &.active,
+  &:hover {
+    text-decoration: none !important;
+    border: none !important;
+    cursor: default;
+  }
+
+  &:focus {
+    text-decoration: none !important;
+    border: none !important;
+  }
+}
+
+.policy-label--black {
+  color: black;
+}
+.right-column {
+  flex-grow: 1;
+}
+
+.right-column--padding {
+  padding: 5% 5% 5% 0;
+}
+
+.regulation-alt {
+  color: #A4A6AA;
+  font-size: 12px;
+  font-style: italic;
+}
+.camera-picture {
+  width: 110px;
+  height: 70px;
+}
+.sign-picture {
+   width: 106px;
+}
+.spiner-container {
+  position: relative;
+  min-height: 150px;
+}
+app-picture {
+  margin-bottom: 3px;
+}
+
+.schedule {
+  margin: 0 0 20px 20px;
+  border-bottom: 1px solid #EFEDEC;
+
+  .left-column {
+    color: $textColorLight;
+  }
+}
+.schedule:last-child {
+  border-bottom: none;
+}
+.schedule-rate {
+  color: black;
+}
+
+.spot-button {
+  text-align: start;
+}
+.meter-button {
+  margin: 0 5px 5px 0;
+}

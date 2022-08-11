@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  font-size: 12px;
+  color: #201f1e;
+  td, th {
+    padding: 5px;
+    text-align: center;
+  }
+
+  th, td:first-child {
+    font-weight: 600;
+  }
+  td:first-child {
+    text-align: right;
+  }
+}

@@ -1,0 +1,118 @@
+<app-sidebar-animation-container type="camera">
+    <div class="map-sidebar map-sidebar-info">
+        <div class="map-sidebar-header">
+            <h3>Camera: #{{camera?.Id}}</h3>
+
+            <button class="btn-close" (click)="close()">
+            </button>
+        </div>
+
+        <div class="map-sidebar-body">
+            <div>
+                <app-panel-collapse header="General info" [expanded]="true">
+                    <div class="map-sidebar-row">
+                        <label>Device ID:</label>
+                        <div>{{camera?.Id}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Status:</label>
+                        <div>
+                            <app-camera-status [status]="camera?.state?.Status"></app-camera-status>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Address:</label>
+                        <div>{{camera?.Address}}</div>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <label>Geo:</label>
+                        <div>
+                            <app-geo-coordinates [coordinates]="camera?.Position"></app-geo-coordinates>
+                        </div>
+                    </div>
+
+                    <div class="map-sidebar-row more-info">
+                        <button ngxFluentDesignLinkButton class="more-info-button" [disabled]="(mapState.popupVisible$ | async)" (click)="mapView()"> Map View </button>
+                    </div>
+                </app-panel-collapse>
+
+                <app-panel-collapse *ngIf="events?.length" header="Events" [expanded]="false">
+                    <table class="table table-borderless table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Time In</th>
+                                <th scope="col">Time Out</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Event</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of events" [class.danger]="item.IsViolation" class="camera-event">
+                                <td>
+                                    {{item.Start | amDateFormat:'hh:mm a'}}
+                                </td>
+                                <td>
+                                    {{item.End | amDateFormat:'hh:mm a'}}
+                                </td>
+                                <td>
+                                    <ng-container *ngIf="item.Start && item.End">{{item.Start | appDiffMinutes: item.End}}</ng-container>
+                                </td>
+                                <td>
+                                    {{item.VehicleType}}
+                                </td>
+                                <td title="{{item.EventType}}">
+                                    {{item.EventTypeShort}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="map-sidebar-row more-info">
+                        <button ngxFluentDesignLinkButton class="more-info-button" (click)="eventsMoreInfo()"> More Info </button>
+                    </div>
+                </app-panel-collapse>
+
+                <app-panel-collapse *ngIf="camera?.Configuration" header="Settings">
+                    <div class="settings">
+                        <div class="map-sidebar-row">
+                            <label>Capture mode:</label>
+                            <div>{{camera?.Configuration?.Mode}}</div>
+                        </div>
+
+                        <div class="map-sidebar-row">
+                            <label>Snapshot Resolution:</label>
+                            <div>{{camera?.Configuration?.ResolutionX}}, {{camera?.Configuration?.ResolutionY}}</div>
+                        </div>
+
+                        <div class="map-sidebar-row">
+                            <label>Capture Interval:</label>
+                            <div>{{(camera?.Configuration?.SnapshotTimeoutMs || 0) / 1000 | number:'1.0-0'}}s</div>
+                        </div>
+
+                        <div class="map-sidebar-row">
+                            <label>Upload Interval:</label>
+                            <div>{{(camera?.Configuration?.UploadIntervalMs || 0) / 1000 | number:'1.0-0'}}s</div>
+                        </div>
+
+                        <div class="map-sidebar-row">
+                            <label>Telemetry Timeout:</label>
+                            <div>{{(camera?.Configuration?.TelemetryTimeoutMs || 0) / 1000 | number:'1.0-0'}}s</div>
+                        </div>
+
+                        <div class="map-sidebar-row">
+                            <label>Boot Time:</label>
+                            <div>
+                                <div *ngFor="let item of camera?.Configuration?.Period">
+                                    {{item.From | amDateFormat:'hh:mm'}} - {{item.To | amDateFormat:'hh:mm'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </app-panel-collapse>
+            </div>
+        </div>
+    </div>
+</app-sidebar-animation-container>

@@ -1,0 +1,53 @@
+<div class="map-popup-header">
+    <span class="sign-icon" [class]="sign?.state?.Status === signStatus.Offline && 'offline' 
+        || sign?.state?.Status === signStatus.Inactive && 'inactive' 
+        || sign?.state?.Status === signStatus.Active && 'active' 
+        || 'offline'">
+    </span>
+    <h4>Sign: #{{sign?.Id}}</h4>
+    <app-sign-status [status]="sign?.state?.Status"></app-sign-status>
+</div>
+
+<div class="map-popup-body">
+    <button style="display:none;"></button>
+
+    <div class="sign-rows">
+        <div class="left-column">
+            <app-picture [url]="pictureUrl | appAddAuthToken | async"></app-picture>
+            <div class="pic-info">Led color: <span [style.color]="ledColor">{{ledColor}}</span></div>
+        </div>
+
+        <div class="right-column">
+            <div class="map-popup-row">
+                <label>Zone:</label>
+                <div class="row-value">
+                    <button ngxFluentDesignLinkButton (click)="openZone()">
+                        {{sign?.ZoneId}}
+                    </button>
+                </div>
+            </div>
+
+            <div class="map-popup-row">
+                <label>Curb Spaces:</label>
+                <div class="row-value">
+                    <app-spots [spots]="sign?.SpotIds"></app-spots>
+                </div>
+            </div>
+
+            <div class="map-popup-row">
+                <label>Address:</label>
+                <div class="row-value">{{sign?.Address}}</div>
+            </div>
+
+            <div class="map-popup-row" *ngIf="!!sign?.state?.LastUpdated">
+                <label>Last update:</label>
+                <div class="row-value">{{sign?.state?.LastUpdated | amDateFormat:'MM/DD/YYYY hh:mm a'}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-popup-row more-info">
+        <button ngxFluentDesignLinkButton (click)="moreInfo()"
+            [disabled]="(mapStateService.sidebarVisible$ | async) === 'sign'"> More info </button>
+    </div>
+</div>

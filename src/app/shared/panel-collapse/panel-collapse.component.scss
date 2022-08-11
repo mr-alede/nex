@@ -1,0 +1,37 @@
+.panel-header {
+    &:not(.static) {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    >div {
+        margin-left: 25px;
+    }
+
+    position: relative;
+    margin: 10px 0px 10px 0px;
+
+    .bi-chevron-down {
+        position: absolute;
+        top: 1px;
+
+        &:before {
+            transition: 0.5s;
+        }
+
+        &.collapsed {
+            &::before {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}
+
+:host {
+    display: block;
+    border-bottom: 1px solid #EDEBE9;
+    padding: 10px 20px 10px 20px;
+}

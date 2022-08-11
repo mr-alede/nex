@@ -1,0 +1,87 @@
+<app-sidebar-animation-container type="layers">
+    <div class="map-sidebar">
+        <div class="map-sidebar-header">
+            <h3>Layers</h3>
+
+            <button class="btn-close" (click)="close()">
+            </button>
+        </div>
+
+        <div class="map-sidebar-body">
+            <div class="map-sidebar-form scrollable-form1">
+                <div class="map-sidebar-group">
+                    <div class="map-sidebar-row area-types-row">
+                        <label>Areas:</label>
+                        <ng-select class="ng-select-sm" [items]="areaTypeLevels" bindLabel="name"
+                            [ngModel]="areasProcessor.selectedAreaTypeLevel$ | async"
+                            (change)="onAreaLevelSelected($event)" bindValue="id" [searchable]="false"
+                            [clearable]="false" [readonly]="areaTypeLevels.length === 0">
+                        </ng-select>
+                    </div>
+
+                    <div class="map-sidebar-area-types-row-border"></div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.zones === true" label="Zones" [inlineLabel]="true"
+                            (changeEvent)="toggleLayer(layerName.Zones)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers['offstreet-zones'] === true"
+                            label="Off-street parking" [inlineLabel]="true"
+                            (changeEvent)="toggleLayer(layerName.OffstreetZones)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.spots === true" label="Parking Curb Spaces"
+                            [inlineLabel]="true" (changeEvent)="toggleLayer(layerName.Spots)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.meters === true" label="Meters"
+                            [inlineLabel]="true" (changeEvent)="toggleLayer(layerName.Meters)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+
+                    <!-- <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.signs === true" label="Signs" [inlineLabel]="true"
+                            (changeEvent)="toggleLayer(layerName.Signs)">
+                        </ngx-fluent-design-toggle>
+                    </div> -->
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.cameras=== true" label="Cameras"
+                            [inlineLabel]="true" (changeEvent)="toggleLayer(layerName.Cameras)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+
+                    <div class="map-sidebar-row-border"></div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.revenue === true" label="Revenue"
+                            [inlineLabel]="true" (changeEvent)="toggleLayer(layerName.Revenue)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+                    <div class="map-sidebar-row revenue-period-row" *ngIf="layers?.revenue === true">
+                        <label>Period:</label>
+                        <ng-select class="ng-select-sm" [items]="revenuePeriods" bindLabel="name" bindValue="id"
+                            [ngModel]="mapState.revenueType$ | async" (change)="onRevenuePeriodSelected($event)"
+                            [searchable]="false" [clearable]="false">
+                        </ng-select>
+                    </div>
+
+                    <div class="map-sidebar-row-border"></div>
+
+                    <div class="map-sidebar-row">
+                        <ngx-fluent-design-toggle [toggled]="layers?.traffic=== true" label="Traffic"
+                            [inlineLabel]="true" (changeEvent)="toggleLayer(layerName.Traffic)">
+                        </ngx-fluent-design-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-sidebar-animation-container>

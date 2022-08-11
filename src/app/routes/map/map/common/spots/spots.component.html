@@ -1,0 +1,3 @@
+<span *ngFor="let spot of spotStates; let isLast=last" class="spot-status" [style.backgroundColor]="spot.color"
+    (click)="spotClick(spot.id)">
+</span>

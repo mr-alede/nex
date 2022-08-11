@@ -1,0 +1,40 @@
+:root {
+    /** Error and status */
+    --ngx-fluent-design-error-background-fill: #FDE7E9;
+    --ngx-fluent-design-success-background-fill: #DFF6DD;
+    --ngx-fluent-design-severe-background-fill: #FED9CC;
+    --ngx-fluent-design-warning-background-fill: #FFF4CE;
+
+    --ngx-fluent-design-status-error: 168, 0, 0;
+    --ngx-fluent-design-status-success: 16, 124, 16;
+    --ngx-fluent-design-status-severe-warning: 216, 59, 1;
+    --ngx-fluent-design-status-warning: 121, 119, 117;
+
+    /** Primary */
+    --ngx-fluent-design-theme-primary: 0, 120, 212;
+    --ngx-fluent-design-theme-secondary: 43, 136, 216;
+    --ngx-fluent-design-theme-tertiary: 113, 175, 229;
+    --ngx-fluent-design-theme-light: 199, 224, 244;
+    --ngx-fluent-design-theme-lighter: 222, 236, 249;
+    --ngx-fluent-design-theme-lighter-alt: 239, 246, 252;
+    --ngx-fluent-design-theme-dark: 0, 90, 158;
+    --ngx-fluent-design-theme-darker: 0, 69, 120;
+    --ngx-fluent-design-theme-dark-alt: 16, 110, 190;
+
+    /** Foreground */
+    --ngx-fluent-design-foreground-black: 0, 0, 0;
+    --ngx-fluent-design-foreground-neutral-dark: 32, 31, 30;
+    --ngx-fluent-design-foreground-neutral-primary: 50, 49, 48;
+    --ngx-fluent-design-foreground-neutral-primary-alt: 59, 58, 57;
+    --ngx-fluent-design-foreground-neutral-secondary: 96, 94, 92;
+    --ngx-fluent-design-foreground-neutral-tertiary: 161, 159, 157;
+    --ngx-fluent-design-foreground-white: 255, 255, 255;
+
+    /** Background */
+    --ngx-fluent-design-background-neutral-tertiary-alt: 200, 198, 196;
+    --ngx-fluent-design-background-neutral-dark: 32, 31, 30;
+    --ngx-fluent-design-background-neutral-quaternary-alt: 225, 223, 221;
+    --ngx-fluent-design-background-neutral-light: 237, 235, 233;
+    --ngx-fluent-design-background-neutral-lighter: 243, 242, 241;
+    --ngx-fluent-design-background-neutral-light-alt: 250, 249, 248;
+}

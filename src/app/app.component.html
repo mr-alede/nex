@@ -1,0 +1,13 @@
+<ng-container>
+  <app-loader [show]="busy"></app-loader>
+</ng-container>
+<ng-container *ngIf="!busy">
+  <app-navbar *ngIf="isSignedIn"></app-navbar>
+  <div class="app-content">
+    <app-nav-sidebar *ngIf="isSignedIn && navSidebar"></app-nav-sidebar>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-full-screen-modal *ngIf="fullScreenModalData" [data]="fullScreenModalData"></app-full-screen-modal>
+</ng-container>

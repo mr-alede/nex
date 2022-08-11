@@ -1,0 +1,5 @@
+<mgl-vector-source id="taffic-source" [url]="'mapbox://mapbox.mapbox-traffic-v1'">
+</mgl-vector-source>
+<mgl-layer id="taffic-layer" type="line" source="taffic-source" [layout]="(layouts$ | async)?.traffic" [paint]="paints.traffic"
+    sourceLayer="traffic" [before]="'building-extrusion'">
+</mgl-layer>

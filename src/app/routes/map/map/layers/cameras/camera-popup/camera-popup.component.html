@@ -1,0 +1,43 @@
+<div class="map-popup-header">
+    <span class="camera-icon" [class]="camera?.state?.Status === cameraStatus.Offline && 'offline' 
+        || camera?.state?.Status === cameraStatus.Inactive && 'inactive' 
+        || camera?.state?.Status === cameraStatus.Active && 'active' 
+        || 'offline'">
+    </span>
+    <h4>Camera: #{{camera?.Id}}</h4>
+    <app-camera-status [status]="camera?.state?.Status"></app-camera-status>
+</div>
+
+<div class="map-popup-body">
+    <button style="display:none;"></button>
+
+    <div class="camera-rows">
+        <div class="left-column">
+            <app-camera-video-player [cameraId]="camera?.Id"></app-camera-video-player>
+            <div class="pic-info">Last update: <span class="state-updated">{{camera?.state?.LastUpdated |
+                    amDateFormat:'MM/DD/YYYY hh:mm a'}}</span></div>
+        </div>
+
+        <div class="right-column">
+            <div class="map-popup-row">
+                <label>Address:</label>
+                <div class="row-value">{{camera?.Address}}</div>
+            </div>
+
+            <div class="map-popup-row">
+                <div style="margin-right: 10px">
+                    <label>Curb Spaces:</label>
+                    <div class="spots-number">{{camera?.SpotIds?.length}} items</div>
+                </div>
+                <div class="row-value">
+                    <app-spots [spots]="camera?.SpotIds"></app-spots>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-popup-row more-info">
+        <button ngxFluentDesignLinkButton (click)="moreInfo()"
+            [disabled]="(mapStateService.sidebarVisible$ | async) === 'camera'"> More info </button>
+    </div>
+</div>
